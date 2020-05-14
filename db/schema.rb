@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_26_020204) do
+ActiveRecord::Schema.define(version: 2020_05_14_223923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,20 @@ ActiveRecord::Schema.define(version: 2020_03_26_020204) do
     t.index ["user_id"], name: "index_api_tokens_on_user_id"
   end
 
+  create_table "lots", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.string "permit"
+    t.string "phase"
+    t.string "lot"
+    t.string "address"
+    t.bigint "plan_type_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "cheers_id"
+    t.index ["plan_type_id"], name: "index_lots_on_plan_type_id"
+    t.index ["project_id"], name: "index_lots_on_project_id"
+  end
+
   create_table "pay_charges", force: :cascade do |t|
     t.bigint "owner_id"
     t.string "processor", null: false
@@ -149,6 +163,17 @@ ActiveRecord::Schema.define(version: 2020_03_26_020204) do
     t.string "owner_type"
   end
 
+  create_table "plan_types", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.string "name"
+    t.string "xml_store"
+    t.jsonb "hers"
+    t.boolean "model_test"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_plan_types_on_project_id"
+  end
+
   create_table "plans", force: :cascade do |t|
     t.string "name"
     t.integer "amount", default: 0, null: false
@@ -157,6 +182,44 @@ ActiveRecord::Schema.define(version: 2020_03_26_020204) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "trial_period_days", default: 0
+  end
+
+  create_table "project_notes", force: :cascade do |t|
+    t.text "note_text"
+    t.bigint "user_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_project_notes_on_project_id"
+    t.index ["user_id"], name: "index_project_notes_on_user_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.string "location"
+    t.string "zipcode"
+    t.string "climate_zone"
+    t.string "jurisdiction"
+    t.string "project_type"
+    t.text "description"
+    t.string "utility_electricity"
+    t.string "utility_gas"
+    t.boolean "active"
+    t.string "file_share"
+    t.bigint "account_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "provider"
+    t.string "code_year"
+    t.boolean "bill_at_frame"
+    t.jsonb "programs"
+    t.boolean "hvac_cf2r"
+    t.integer "total_lot_count"
+    t.string "cheers_id"
+    t.string "contract_status"
+    t.index ["account_id"], name: "index_projects_on_account_id"
+    t.index ["name"], name: "index_projects_on_name"
+    t.index ["project_type"], name: "index_projects_on_project_type"
   end
 
   create_table "user_connected_accounts", force: :cascade do |t|
@@ -218,5 +281,10 @@ ActiveRecord::Schema.define(version: 2020_03_26_020204) do
   add_foreign_key "account_users", "users"
   add_foreign_key "accounts", "users", column: "owner_id"
   add_foreign_key "api_tokens", "users"
+  add_foreign_key "lots", "plan_types"
+  add_foreign_key "lots", "projects"
+  add_foreign_key "plan_types", "projects"
+  add_foreign_key "project_notes", "projects"
+  add_foreign_key "project_notes", "users"
   add_foreign_key "user_connected_accounts", "users"
 end

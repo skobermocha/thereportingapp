@@ -1,0 +1,35 @@
+<div class="container mx-auto my-8 px-4">
+  <div class="max-w-3xl mx-auto">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="h3"><%= link_to 'Lots', lots_path %> > Lot #<%= @lot.sitename %></h1>
+      <%= link_to 'Edit', edit_lot_path(@lot), class: "btn btn-link" %>
+    </div>
+
+    <div class="bg-white rounded shadow p-8">
+            <div class="mb-4">
+        <h5>Project</h5>
+        <%= @lot.project %>
+      </div>
+            <div class="mb-4">
+        <h5>Permit</h5>
+        <%= @lot.permit %>
+      </div>
+            <div class="mb-4">
+        <h5>Phase</h5>
+        <%= @lot.phase %>
+      </div>
+            <div class="mb-4">
+        <h5>Lot</h5>
+        <%= @lot.lot %>
+      </div>
+            <div class="mb-4">
+        <h5>Address</h5>
+        <%= @lot.address %>
+      </div>
+            <div class="mb-4">
+        <h5>Plan type</h5>
+        <%= @lot.plan_type %>
+      </div>
+          </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="container mx-auto my-8 px-4">
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="h3">Plan Types</h1>
+
+    <% if @plan_types.exists? %>
+      <%= link_to 'New Plan Type', new_project_plan_type_path(@project), class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+  <% if @plan_types.exists? %>
+    <div class="bg-white rounded shadow table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @plan_types, :project_id, 'Project', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @plan_types, :name, 'Name', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @plan_types, :xml_store, 'Xml store', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @plan_types, :hers, 'Hers', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @plan_types, :model_test, 'Model test', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @plan_types.each do |plan_type| %>
+          <tr class="group border-t border-gray-400 hover:bg-gray-100">
+                      <td class="p-3"><%= plan_type.project_id %></td>
+                      <td class="p-3"><%= plan_type.name %></td>
+                      <td class="p-3"><%= plan_type.xml_store %></td>
+                      <td class="p-3"><%= plan_type.hers %></td>
+                      <td class="p-3"><%= plan_type.model_test %></td>
+          
+            <td>
+              <%= link_to "View", project_plan_type_path(@project, plan_type), class: "btn btn-link no-underline" %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <% if @pagy.pages > 1 %>
+      <div class="text-center my-6">
+        <%== pagy_nav(@pagy) %>
+      </div>
+    <% end %>
+
+  <% else %>
+    <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+      <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+      <div class="flex-1 text-center">
+        <p class="h3 mb-4">Create your first Plan Type</p>
+        <%= link_to 'New Plan Type', new_project_plan_type_path(@project), class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>

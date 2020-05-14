@@ -1,0 +1,83 @@
+<div class="container mx-auto my-8 px-4">
+  <div class="max-w-3xl mx-auto">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="h3"><%= link_to 'Projects', projects_path %> > Project #<%= @project.id %></h1>
+      <%= link_to 'Edit', edit_project_path(@project), class: "btn btn-link" %>
+    </div>
+
+    <div class="bg-white rounded shadow p-8">
+            <div class="mb-4">
+        <h5>Name</h5>
+        <%= @project.name %>
+      </div>
+            <div class="mb-4">
+        <h5>Location</h5>
+        <%= @project.location %>
+      </div>
+            <div class="mb-4">
+        <h5>Zipcode</h5>
+        <%= @project.zipcode %>
+      </div>
+            <div class="mb-4">
+        <h5>Climate zone</h5>
+        <%= @project.climate_zone %>
+      </div>
+            <div class="mb-4">
+        <h5>Jurisdiction</h5>
+        <%= @project.jurisdiction %>
+      </div>
+            <div class="mb-4">
+        <h5>Project type</h5>
+        <%= @project.project_type %>
+      </div>
+            <div class="mb-4">
+        <h5>Description</h5>
+        <%= @project.description %>
+      </div>
+            <div class="mb-4">
+        <h5>Utility electricity</h5>
+        <%= @project.utility_electricity %>
+      </div>
+            <div class="mb-4">
+        <h5>Utility gas</h5>
+        <%= @project.utility_gas %>
+      </div>
+            <div class="mb-4">
+        <h5>Active</h5>
+        <%= @project.active %>
+      </div>
+            <div class="mb-4">
+        <h5>File share</h5>
+        <%= @project.file_share %>
+      </div>
+            <div class="mb-4">
+        <h5>Account</h5>
+        <%= @project.account_id %>
+      </div>
+      <div class="mb-4">
+        <h5>Provider</h5>
+        <%= @project.provider %>
+      </div>
+      <div class="mb-4">
+        <h5>code_year</h5>
+        <%= @project.code_year %>
+      </div>
+      <div class="mb-4">
+        <h5>bill_at_frame</h5>
+        <%= @project.bill_at_frame %>
+      </div>
+      <div class="mb-4">
+        <h5>programs</h5>
+        <%= @project.programs %>
+      </div>
+      <div class="mb-4">
+        <h5>hvac_cf2r</h5>
+        <%= @project.hvac_cf2r %>
+      </div>
+      <div class="mb-4">
+        <h5>total_lot_count</h5>
+        <%= @project.total_lot_count %>
+      </div>
+          </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<%= form_with(model: [@project, plan_type]) do |form| %>
+  <%= render "shared/error_messages", resource: form.object %>
+
+  <div class="form-group">
+    <%= form.label :project_id %>
+    <%= form.text_field :project_id, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :xml_store %>
+    <%= form.text_field :xml_store, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :hers %>
+    <%= form.text_field :hers, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :model_test %>
+    <%= form.check_box :model_test, class: "form-control" %>
+  </div>
+
+  <div class="form-group flex justify-between">
+    <%= form.button class: "btn btn-primary" %>
+
+    <% if form.object.persisted? %>
+      <%= link_to 'Delete', form.object, class: "btn btn-danger outline", method: :delete, data: { remote: true, confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
+<% end %>

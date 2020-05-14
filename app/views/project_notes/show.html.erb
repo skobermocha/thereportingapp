@@ -1,0 +1,23 @@
+<div class="container mx-auto my-8 px-4">
+  <div class="max-w-3xl mx-auto">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="h3"><%= link_to 'Project Notes', project_notes_path %> > Project Note #<%= @project_note.id %></h1>
+      <%= link_to 'Edit', edit_project_note_path(@project_note), class: "btn btn-link" %>
+    </div>
+
+    <div class="bg-white rounded shadow p-8">
+            <div class="mb-4">
+        <h5>Note text</h5>
+        <%= @project_note.note_text %>
+      </div>
+            <div class="mb-4">
+        <h5>User</h5>
+        <%= @project_note.user %>
+      </div>
+            <div class="mb-4">
+        <h5>Project</h5>
+        <%= @project_note.project %>
+      </div>
+          </div>
+  </div>
+</div>

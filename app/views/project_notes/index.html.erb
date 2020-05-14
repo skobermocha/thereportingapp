@@ -1,0 +1,53 @@
+<div class="container mx-auto my-8 px-4">
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="h3">Project Notes</h1>
+
+    <% if @project_notes.exists? %>
+      <%= link_to 'New Project Note', new_project_project_note_path(@project), class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+  <% if @project_notes.exists? %>
+    <div class="bg-white rounded shadow table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @project_notes, :note_text, 'Note text', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @project_notes, :user_id, 'User', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @project_notes, :project_id, 'Project', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @project_notes.each do |project_note| %>
+          <tr class="group border-t border-gray-400 hover:bg-gray-100">
+                      <td class="p-3"><%= project_note.note_text %></td>
+                      <td class="p-3"><%= project_note.user_id %></td>
+                      <td class="p-3"><%= project_note.project.name %></td>
+          
+            <td>
+              <%= link_to "View", project_project_notes_path(@project, project_note), class: "btn btn-link no-underline" %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <% if @pagy.pages > 1 %>
+      <div class="text-center my-6">
+        <%== pagy_nav(@pagy) %>
+      </div>
+    <% end %>
+
+  <% else %>
+    <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+      <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+      <div class="flex-1 text-center">
+        <p class="h3 mb-4">Create your first Project Note</p>
+        <%= link_to 'New Project Note', new_project_project_note_path(@project), class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>

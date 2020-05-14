@@ -1,0 +1,71 @@
+<div class="container mx-auto my-8 px-4">
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="h3">Projects</h1>
+
+    <% if @projects.exists? %>
+      <%= link_to 'New Project', new_project_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+  <% if @projects.exists? %>
+    <div class="bg-white rounded shadow table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :name, 'Name', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :location, 'Location', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :zipcode, 'Zipcode', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :climate_zone, 'Climate zone', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :jurisdiction, 'Jurisdiction', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :project_type, 'Project type', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :description, 'Description', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :utility_electricity, 'Utility electricity', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :utility_gas, 'Utility gas', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :active, 'Active', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :file_share, 'File share', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :account_id, 'Account', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @projects.each do |project| %>
+          <tr class="group border-t border-gray-400 hover:bg-gray-100">
+                      <td class="p-3"><%= project.name %></td>
+                      <td class="p-3"><%= project.location %></td>
+                      <td class="p-3"><%= project.zipcode %></td>
+                      <td class="p-3"><%= project.climate_zone %></td>
+                      <td class="p-3"><%= project.jurisdiction %></td>
+                      <td class="p-3"><%= project.project_type %></td>
+                      <td class="p-3"><%= project.description %></td>
+                      <td class="p-3"><%= project.utility_electricity %></td>
+                      <td class="p-3"><%= project.utility_gas %></td>
+                      <td class="p-3"><%= project.active %></td>
+                      <td class="p-3"><%= project.file_share %></td>
+                      <td class="p-3"><%= project.account_id %></td>
+          
+            <td>
+              <%= link_to "View", project, class: "btn btn-link no-underline" %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <% if @pagy.pages > 1 %>
+      <div class="text-center my-6">
+        <%== pagy_nav(@pagy) %>
+      </div>
+    <% end %>
+
+  <% else %>
+    <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+      <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+      <div class="flex-1 text-center">
+        <p class="h3 mb-4">Create your first Project</p>
+        <%= link_to 'New Project', new_project_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>
