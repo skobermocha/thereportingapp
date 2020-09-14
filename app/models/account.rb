@@ -2,19 +2,21 @@
 #
 # Table name: accounts
 #
-#  id                 :bigint(8)        not null, primary key
+#  id                 :bigint           not null, primary key
 #  card_exp_month     :string
 #  card_exp_year      :string
 #  card_last4         :string
 #  card_type          :string
+#  domain             :string
 #  extra_billing_info :text
 #  name               :string
 #  personal           :boolean          default(FALSE)
 #  processor          :string
+#  subdomain          :string
 #  trial_ends_at      :datetime
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  owner_id           :bigint(8)
+#  owner_id           :bigint
 #  processor_id       :string
 #
 # Indexes
@@ -37,16 +39,14 @@ class Account < ApplicationRecord
   has_many :account_users, dependent: :destroy
   has_many :users, through: :account_users
 
-  has_one_attached :logo
-
   scope :personal, -> { where(personal: true) }
   scope :impersonal, -> { where(personal: false) }
 
   has_one_attached :avatar
 
   validates :name, presence: true
-  validates :domain, exclusion: {in: RESERVED_DOMAINS, message: "%{value} is reserved."}
-  validates :subdomain, exclusion: {in: RESERVED_SUBDOMAINS, message: "%{value} is reserved."}, format: {with: /\A[a-zA-Z0-9]+[a-zA-Z0-9\-_]*[a-zA-Z0-9]+\Z/, message: "must be at least 2 characters and alphanumeric", allow_blank: true}
+  validates :domain, exclusion: {in: RESERVED_DOMAINS, message: :reserved}
+  validates :subdomain, exclusion: {in: RESERVED_SUBDOMAINS, message: :reserved}, format: {with: /\A[a-zA-Z0-9]+[a-zA-Z0-9\-_]*[a-zA-Z0-9]+\Z/, message: :format, allow_blank: true}
 
   def email
     account_users.includes(:user).order(created_at: :asc).first.user.email

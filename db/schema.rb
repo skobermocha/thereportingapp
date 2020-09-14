@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_161344) do
+
+ActiveRecord::Schema.define(version: 2020_08_06_001403) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +132,20 @@ ActiveRecord::Schema.define(version: 2020_05_15_161344) do
     t.string "cheers_id"
     t.index ["plan_type_id"], name: "index_lots_on_plan_type_id"
     t.index ["project_id"], name: "index_lots_on_project_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.string "recipient_type", null: false
+    t.bigint "recipient_id", null: false
+    t.string "type"
+    t.jsonb "params"
+    t.datetime "read_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "interacted_at"
+    t.index ["account_id"], name: "index_notifications_on_account_id"
+    t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient_type_and_recipient_id"
   end
 
   create_table "pay_charges", force: :cascade do |t|
@@ -286,6 +302,7 @@ ActiveRecord::Schema.define(version: 2020_05_15_161344) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
+    t.string "preferred_language"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"

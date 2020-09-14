@@ -115,7 +115,14 @@ module Jumpstart
         line = spacing + "gem '#{name}'"
         line += ", '#{version}'" if version.present?
         line += ", #{options}" if options.present?
-        line += ", #{require_gem}" if require_gem.present?
+
+        case require_gem
+        when true, false
+          line += ", require: #{require_gem}"
+        when String
+          line += ", require: '#{require_gem}'"
+        end
+
         line
       }.join("\n")
     end
@@ -138,6 +145,14 @@ module Jumpstart
 
     def omniauth_providers
       Array.wrap(@omniauth_providers)
+    end
+
+    def register_with_account=(value)
+      @register_with_account = ActiveModel::Type::Boolean.new.cast(value)
+    end
+
+    def register_with_account?
+      @register_with_account.nil? ? false : ActiveModel::Type::Boolean.new.cast(@register_with_account)
     end
 
     def livereload=(value)
@@ -251,7 +266,7 @@ module Jumpstart
       content << "stripe: stripe listen --forward-to localhost:5000/webhooks/stripe" if dev && stripe?
 
       # Guard LiveReload
-      content << "guard: guard" if dev && livereload?
+      content << "guard: bundle exec guard" if dev && livereload?
 
       content.join("\n")
     end

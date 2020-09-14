@@ -2,17 +2,17 @@
 #
 # Table name: account_users
 #
-#  id         :bigint(8)        not null, primary key
+#  id         :bigint           not null, primary key
 #  roles      :jsonb            not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  account_id    :bigint(8)
-#  user_id    :bigint(8)
+#  account_id :bigint
+#  user_id    :bigint
 #
 # Indexes
 #
 #  index_account_users_on_account_id  (account_id)
-#  index_account_users_on_user_id  (user_id)
+#  index_account_users_on_user_id     (user_id)
 #
 # Foreign Keys
 #
@@ -48,5 +48,12 @@ class AccountUserTest < ActiveSupport::TestCase
   test "has no active roles" do
     member = AccountUser.new admin: false
     assert_empty member.active_roles
+  end
+
+  test "owner cannot remove the admin role" do
+    member = account_users(:company_admin)
+    assert member.account_owner?
+    member.update(admin: false)
+    assert_not member.valid?
   end
 end
