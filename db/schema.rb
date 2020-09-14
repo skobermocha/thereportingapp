@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_14_223923) do
+ActiveRecord::Schema.define(version: 2020_05_15_161344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -194,6 +194,15 @@ ActiveRecord::Schema.define(version: 2020_05_14_223923) do
     t.index ["user_id"], name: "index_project_notes_on_user_id"
   end
 
+  create_table "project_users", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_project_users_on_account_id"
+    t.index ["project_id"], name: "index_project_users_on_project_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.string "location"
@@ -220,6 +229,16 @@ ActiveRecord::Schema.define(version: 2020_05_14_223923) do
     t.index ["account_id"], name: "index_projects_on_account_id"
     t.index ["name"], name: "index_projects_on_name"
     t.index ["project_type"], name: "index_projects_on_project_type"
+  end
+
+  create_table "sample_groups", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "lot_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["lot_id"], name: "index_sample_groups_on_lot_id"
+    t.index ["project_id"], name: "index_sample_groups_on_project_id"
   end
 
   create_table "user_connected_accounts", force: :cascade do |t|
@@ -286,5 +305,9 @@ ActiveRecord::Schema.define(version: 2020_05_14_223923) do
   add_foreign_key "plan_types", "projects"
   add_foreign_key "project_notes", "projects"
   add_foreign_key "project_notes", "users"
+  add_foreign_key "project_users", "accounts"
+  add_foreign_key "project_users", "projects"
+  add_foreign_key "sample_groups", "lots"
+  add_foreign_key "sample_groups", "projects"
   add_foreign_key "user_connected_accounts", "users"
 end
