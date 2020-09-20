@@ -2,5 +2,5 @@
 # Use this to configure how multitenancy works if you're using it.
 
 ActsAsTenant.configure do |config|
-  config.require_tenant = false
+  config.require_tenant = true
 end

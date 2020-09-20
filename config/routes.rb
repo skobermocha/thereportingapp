@@ -2,12 +2,12 @@
 Rails.application.routes.draw do
   
   
-  resources :sample_groups
-  resources :project_users
   resources :projects do
     resources :project_notes
-    resources :lots
     resources :plan_types
+    resources :lots
+    resources :sample_groups
+    resources :project_users
   end
   # Jumpstart views
   if Rails.env.development? || Rails.env.test?

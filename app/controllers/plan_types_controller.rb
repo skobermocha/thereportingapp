@@ -13,7 +13,7 @@ class PlanTypesController < ApplicationController
 
   # GET /plan_types/new
   def new
-    @plan_type = @project.plan_type.build
+    @plan_type = @project.plan_types.build
   end
 
   # GET /plan_types/1/edit
@@ -22,7 +22,7 @@ class PlanTypesController < ApplicationController
 
   # POST /plan_types
   def create
-    @plan_type = @project.plan_type.build(plan_type_params)
+    @plan_type = @project.plan_types.build(plan_type_params)
 
     if @plan_type.save
       redirect_to @plan_type, notice: 'Plan type was successfully created.'

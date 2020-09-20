@@ -14,8 +14,8 @@ class ProjectUsersTest < ApplicationSystemTestCase
     visit project_users_url
     click_on "New Project User"
 
-    fill_in "Account id", with: @project_user.account_id_id
-    fill_in "Project id", with: @project_user.project_id_id
+    fill_in "Account id", with: @project_user.account_id
+    fill_in "Project id", with: @project_user.project_id
     click_on "Create Project user"
 
     assert_text "Project user was successfully created"
@@ -26,8 +26,8 @@ class ProjectUsersTest < ApplicationSystemTestCase
     visit project_user_url(@project_user)
     click_on "Edit", match: :first
 
-    fill_in "Account id", with: @project_user.account_id_id
-    fill_in "Project id", with: @project_user.project_id_id
+    fill_in "Account id", with: @project_user.account_id
+    fill_in "Project id", with: @project_user.project_id
     click_on "Update Project user"
 
     assert_text "Project user was successfully updated"

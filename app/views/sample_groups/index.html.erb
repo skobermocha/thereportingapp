@@ -3,7 +3,7 @@
     <h1 class="h3">Sample Groups</h1>
 
     <% if @sample_groups.exists? %>
-      <%= link_to 'New Sample Group', new_sample_group_path, class: "btn btn-primary" %>
+      <%= link_to 'New Sample Group', new_project_sample_group_path(@project), class: "btn btn-primary" %>
     <% end %>
   </div>
 
@@ -12,8 +12,8 @@
       <table class="table">
         <thead>
           <tr>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @sample_groups, :project_id_id, 'Project', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @sample_groups, :lot_id_id, 'Lot', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @sample_groups, :project_id, 'Project', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @sample_groups, :lot_id, 'Lot', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @sample_groups, :name, 'Name', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
           </tr>
@@ -22,8 +22,8 @@
         <tbody>
         <% @sample_groups.each do |sample_group| %>
           <tr class="group border-t border-gray-400 hover:bg-gray-100">
-                      <td class="p-3"><%= sample_group.project_id_id %></td>
-                      <td class="p-3"><%= sample_group.lot_id_id %></td>
+                      <td class="p-3"><%= sample_group.project_id %></td>
+                      <td class="p-3"><%= sample_group.lot_id %></td>
                       <td class="p-3"><%= sample_group.name %></td>
           
             <td>
@@ -46,7 +46,7 @@
       <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
       <div class="flex-1 text-center">
         <p class="h3 mb-4">Create your first Sample Group</p>
-        <%= link_to 'New Sample Group', new_sample_group_path, class: "btn btn-primary" %>
+        <%= link_to 'New Sample Group', new_project_sample_group_path(@project), class: "btn btn-primary" %>
       </div>
     </div>
   <% end %>

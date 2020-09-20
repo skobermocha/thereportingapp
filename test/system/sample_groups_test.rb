@@ -14,9 +14,9 @@ class SampleGroupsTest < ApplicationSystemTestCase
     visit sample_groups_url
     click_on "New Sample Group"
 
-    fill_in "Lot id", with: @sample_group.lot_id_id
+    fill_in "Lot id", with: @sample_group.lot_id
     fill_in "Name", with: @sample_group.name
-    fill_in "Project id", with: @sample_group.project_id_id
+    fill_in "Project id", with: @sample_group.project_id
     click_on "Create Sample group"
 
     assert_text "Sample group was successfully created"
@@ -27,9 +27,9 @@ class SampleGroupsTest < ApplicationSystemTestCase
     visit sample_group_url(@sample_group)
     click_on "Edit", match: :first
 
-    fill_in "Lot id", with: @sample_group.lot_id_id
+    fill_in "Lot id", with: @sample_group.lot_id
     fill_in "Name", with: @sample_group.name
-    fill_in "Project id", with: @sample_group.project_id_id
+    fill_in "Project id", with: @sample_group.project_id
     click_on "Update Sample group"
 
     assert_text "Sample group was successfully updated"

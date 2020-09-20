@@ -27,7 +27,7 @@
                       <td class="p-3"><%= project_note.project.name %></td>
           
             <td>
-              <%= link_to "View", project_project_notes_path(@project, project_note), class: "btn btn-link no-underline" %>
+              <%= link_to "View", project_project_note_path(@project, project_note), class: "btn btn-link no-underline" %>
             </td>
           </tr>
         <% end %>

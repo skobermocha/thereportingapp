@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2020_08_06_001403) do
-
+ActiveRecord::Schema.define(version: 2020_09_20_022154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -225,7 +223,6 @@ ActiveRecord::Schema.define(version: 2020_08_06_001403) do
     t.string "zipcode"
     t.string "climate_zone"
     t.string "jurisdiction"
-    t.string "project_type"
     t.text "description"
     t.string "utility_electricity"
     t.string "utility_gas"
@@ -237,14 +234,10 @@ ActiveRecord::Schema.define(version: 2020_08_06_001403) do
     t.string "provider"
     t.string "code_year"
     t.boolean "bill_at_frame"
-    t.jsonb "programs"
-    t.boolean "hvac_cf2r"
     t.integer "total_lot_count"
     t.string "cheers_id"
-    t.string "contract_status"
     t.index ["account_id"], name: "index_projects_on_account_id"
     t.index ["name"], name: "index_projects_on_name"
-    t.index ["project_type"], name: "index_projects_on_project_type"
   end
 
   create_table "sample_groups", force: :cascade do |t|
@@ -255,6 +248,33 @@ ActiveRecord::Schema.define(version: 2020_08_06_001403) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["lot_id"], name: "index_sample_groups_on_lot_id"
     t.index ["project_id"], name: "index_sample_groups_on_project_id"
+  end
+
+  create_table "taggings", id: :serial, force: :cascade do |t|
+    t.integer "tag_id"
+    t.string "taggable_type"
+    t.integer "taggable_id"
+    t.string "tagger_type"
+    t.integer "tagger_id"
+    t.string "context", limit: 128
+    t.datetime "created_at"
+    t.index ["context"], name: "index_taggings_on_context"
+    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+    t.index ["taggable_id", "taggable_type", "context"], name: "taggings_taggable_context_idx"
+    t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
+    t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
+    t.index ["taggable_type"], name: "index_taggings_on_taggable_type"
+    t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type"
+    t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
+  end
+
+  create_table "tags", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer "taggings_count", default: 0
+    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
   create_table "user_connected_accounts", force: :cascade do |t|
@@ -326,5 +346,6 @@ ActiveRecord::Schema.define(version: 2020_08_06_001403) do
   add_foreign_key "project_users", "projects"
   add_foreign_key "sample_groups", "lots"
   add_foreign_key "sample_groups", "projects"
+  add_foreign_key "taggings", "tags"
   add_foreign_key "user_connected_accounts", "users"
 end

@@ -17,7 +17,7 @@ class SampleGroupsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create sample_group" do
     assert_difference('SampleGroup.count') do
-      post sample_groups_url, params: { sample_group: { lot_id_id: @sample_group.lot_id_id, name: @sample_group.name, project_id_id: @sample_group.project_id_id } }
+      post sample_groups_url, params: { sample_group: { lot_id: @sample_group.lot_id, name: @sample_group.name, project_id: @sample_group.project_id } }
     end
 
     assert_redirected_to sample_group_url(SampleGroup.last)
@@ -34,7 +34,7 @@ class SampleGroupsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update sample_group" do
-    patch sample_group_url(@sample_group), params: { sample_group: { lot_id_id: @sample_group.lot_id_id, name: @sample_group.name, project_id_id: @sample_group.project_id_id } }
+    patch sample_group_url(@sample_group), params: { sample_group: { lot_id: @sample_group.lot_id, name: @sample_group.name, project_id: @sample_group.project_id } }
     assert_redirected_to sample_group_url(@sample_group)
   end
 

@@ -3,7 +3,7 @@
     <h1 class="h3">Project Users</h1>
 
     <% if @project_users.exists? %>
-      <%= link_to 'New Project User', new_project_user_path, class: "btn btn-primary" %>
+      <%= link_to 'New Project User', new_project_project_user_path(@project), class: "btn btn-primary" %>
     <% end %>
   </div>
 
@@ -12,8 +12,8 @@
       <table class="table">
         <thead>
           <tr>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @project_users, :project_id_id, 'Project', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @project_users, :account_id_id, 'Account', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @project_users, :project_id, 'Project', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @project_users, :account_id, 'Account', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
           </tr>
         </thead>
@@ -21,11 +21,11 @@
         <tbody>
         <% @project_users.each do |project_user| %>
           <tr class="group border-t border-gray-400 hover:bg-gray-100">
-                      <td class="p-3"><%= project_user.project_id_id %></td>
-                      <td class="p-3"><%= project_user.account_id_id %></td>
+                      <td class="p-3"><%= project_user.project_id %></td>
+                      <td class="p-3"><%= project_user.account_id %></td>
           
             <td>
-              <%= link_to "View", project_user, class: "btn btn-link no-underline" %>
+              <%= link_to "View", project_project_user_path(@project, project_user), class: "btn btn-link no-underline" %>
             </td>
           </tr>
         <% end %>
@@ -44,7 +44,7 @@
       <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
       <div class="flex-1 text-center">
         <p class="h3 mb-4">Create your first Project User</p>
-        <%= link_to 'New Project User', new_project_user_path, class: "btn btn-primary" %>
+        <%= link_to 'New Project User', new_project_project_user_path(@project), class: "btn btn-primary" %>
       </div>
     </div>
   <% end %>
