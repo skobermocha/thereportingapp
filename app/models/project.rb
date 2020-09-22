@@ -35,4 +35,6 @@ class Project < ApplicationRecord
   	has_many :lots, dependent: :destroy
 	has_many :sample_groups, dependent: :destroy
   	has_many :project_users, dependent: :destroy
+  	acts_as_taggable_on :programs, :projecttypes
+
 end

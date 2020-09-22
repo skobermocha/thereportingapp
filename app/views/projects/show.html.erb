@@ -10,51 +10,72 @@
     <%= link_to 'Project Notes', project_project_notes_path(@project) %>
     <%= link_to 'CF1Rs', project_plan_types_path(@project) %>
     <div class="bg-white rounded shadow p-8">
-            <div class="mb-4">
+      <div class="mb-4">
         <h5>Name</h5>
         <%= @project.name %>
       </div>
-            <div class="mb-4">
+      <div class="mb-4" id="programs">
+        <h5>Work Scopes</h5>
+        <% @project.workscopes.each do |workscope| %>
+        <div class="rounded-full py-1 px-4 bg-secondary-500 text-xs inline-block text-white font-bold leading-normal uppercase mr-2">
+        <%= workscope.name %>
+        </div>
+        <% end %>
+        <%= link_to 'Add', :anchor => "" %>
+      </div>
+      <div class="mb-4" id="programs">
+        <h5>Program Enrollments</h5>
+        <% @project.programs.each do |program| %>
+        <div class="rounded-full py-1 px-4 bg-primary-500 text-xs inline-block text-white font-bold leading-normal uppercase mr-2">
+        <%= program.name %>
+        </div>
+        <% end %>
+      </div>
+      <div class="mb-4">
         <h5>Location</h5>
         <%= @project.location %>
       </div>
-            <div class="mb-4">
+      <div class="mb-4">
         <h5>Zipcode</h5>
         <%= @project.zipcode %>
       </div>
-            <div class="mb-4">
+      <div class="mb-4">
         <h5>Climate zone</h5>
         <%= @project.climate_zone %>
       </div>
-            <div class="mb-4">
+      <div class="mb-4">
         <h5>Jurisdiction</h5>
         <%= @project.jurisdiction %>
       </div>
-            <div class="mb-4">
+      <div class="mb-4" id="project_types">
         <h5>Project type</h5>
-        <%= @project.project_type %>
+          <% @project.projecttypes.each do |projecttype| %>
+          <div class="rounded-full py-1 px-4 bg-primary-500 text-xs inline-block text-white font-bold leading-normal uppercase mr-2">
+          <%= projecttype.name %>
+          </div>
+          <% end %>
       </div>
-            <div class="mb-4">
+      <div class="mb-4">
         <h5>Description</h5>
         <%= @project.description %>
       </div>
-            <div class="mb-4">
+      <div class="mb-4">
         <h5>Utility electricity</h5>
         <%= @project.utility_electricity %>
       </div>
-            <div class="mb-4">
+      <div class="mb-4">
         <h5>Utility gas</h5>
         <%= @project.utility_gas %>
       </div>
-            <div class="mb-4">
+      <div class="mb-4">
         <h5>Active</h5>
         <%= @project.active %>
       </div>
-            <div class="mb-4">
+      <div class="mb-4">
         <h5>File share</h5>
         <%= @project.file_share %>
       </div>
-            <div class="mb-4">
+      <div class="mb-4">
         <h5>Account</h5>
         <%= @project.account_id %>
       </div>
@@ -71,17 +92,9 @@
         <%= @project.bill_at_frame %>
       </div>
       <div class="mb-4">
-        <h5>programs</h5>
-        <%= @project.programs %>
-      </div>
-      <div class="mb-4">
-        <h5>hvac_cf2r</h5>
-        <%= @project.hvac_cf2r %>
-      </div>
-      <div class="mb-4">
         <h5>total_lot_count</h5>
         <%= @project.total_lot_count %>
       </div>
-          </div>
+    </div>
   </div>
 </div>

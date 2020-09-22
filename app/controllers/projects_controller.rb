@@ -4,10 +4,12 @@ class ProjectsController < ApplicationController
   # GET /projects
   def index
     @pagy, @projects = pagy(Project.sort_by_params(params[:sort], sort_direction))
+
   end
 
   # GET /projects/1
   def show
+
   end
 
   # GET /projects/new
@@ -17,6 +19,44 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    @project.programs.each do |program|
+      if program.name == "CAHP"
+        @CAHP = true
+      end
+      if program.name == "CMFMH"
+        @CMFMH = true
+      end
+      if program.name == "LEED"
+        @LEED = true
+      end
+      if program.name == "GPR"
+        @GPR = true
+      end
+      if program.name == "EStar"
+        @ESTAR = true
+      end
+      if program.name == "TCAC"
+        @TCAC = true
+      end
+    end
+
+    @project.projecttypes.each do |type|
+      if type.name == "RNC SF"
+        @RNCSF = true
+      end
+      if type.name == "RNC MF"
+        @RNCMF = true
+      end
+      if type.name == "High Rise"
+        @HighRise = true
+      end
+      if type.name == "Mixed Use"
+        @MixedUse = true
+      end
+      if type.name == "Non-Res"
+        @NonRes = true
+      end
+    end
   end
 
   # POST /projects
@@ -32,6 +72,9 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1
   def update
+
+    @project.projecttype_list = params[:projecttype_list]
+    @project.program_list = params[:program_list]
     if @project.update(project_params)
       redirect_to @project, notice: 'Project was successfully updated.'
     else
@@ -53,6 +96,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def project_params
-      params.require(:project).permit(:name, :location, :zipcode, :climate_zone, :jurisdiction, :project_type, :description, :utility_electricity, :utility_gas, :active, :file_share, :account_id, :provider, :code_year, :bill_at_frame, :programs, :hvac_cf2r, :total_lot_count)
+      params.require(:project).permit(:program_list, :projecttype_list, :name, :location, :zipcode, :climate_zone, :jurisdiction, :project_type, :description, :utility_electricity, :utility_gas, :active, :file_share, :account_id, :provider, :code_year, :bill_at_frame, :programs, :hvac_cf2r, :total_lot_count)
     end
 end

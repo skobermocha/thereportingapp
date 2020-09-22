@@ -17,7 +17,6 @@
             <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :zipcode, 'Zipcode', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :climate_zone, 'Climate zone', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :jurisdiction, 'Jurisdiction', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :project_type, 'Project type', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :description, 'Description', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :utility_electricity, 'Utility electricity', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :utility_gas, 'Utility gas', class: 'text-gray-700' %></th>
@@ -36,7 +35,6 @@
                       <td class="p-3"><%= project.zipcode %></td>
                       <td class="p-3"><%= project.climate_zone %></td>
                       <td class="p-3"><%= project.jurisdiction %></td>
-                      <td class="p-3"><%= project.project_type %></td>
                       <td class="p-3"><%= project.description %></td>
                       <td class="p-3"><%= project.utility_electricity %></td>
                       <td class="p-3"><%= project.utility_gas %></td>

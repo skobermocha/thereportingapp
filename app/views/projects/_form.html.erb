@@ -28,9 +28,32 @@
 
   <div class="form-group">
     <%= form.label :project_type %>
-    <%= form.text_field :project_type, class: "form-control" %>
+    <input type="checkbox" id="RNCSF" name="projecttype_list[]" value="RNC SF" class="form-checkbox" <%= @RNCSF ? 'checked' : ''  %> />
+    <label for="RNCSF" class="inline-block" >RNC SF</label>
+    <input type="checkbox" id="RNCMF" name="projecttype_list[]" value="RNC MF"class="form-checkbox" <%= @RNCMF ? 'checked' : '' %> />
+    <label for="RNCMF" class="inline-block" >RNC MF</label>
+    <input type="checkbox" id="HR" name="projecttype_list[]" value="High Rise"class="form-checkbox" <%= @HighRise ? 'checked' : '' %> />
+    <label for="HR" class="inline-block" >High Rise</label>
+    <input type="checkbox" id="MixedUse" name="projecttype_list[]" value="Mixed Use"class="form-checkbox" <%= @MixedUse ? 'checked' : '' %> />
+    <label for="MixedUse" class="inline-block" >Mixed Use</label>
+    <input type="checkbox" id="NonRes" name ="projecttype_list[]" value="Non-Res"class="form-checkbox" <%= @NonRes ? 'checked' : '' %> />
+    <label for="NonRes" class="inline-block" >Non-Res</label>
   </div>
-
+  <div class="form-group">
+    <%= form.label :program_enrollment %>
+    <input type="checkbox" id="CAHP" name="program_list[]" value="CAHP" class="form-checkbox" <%= @CAHP ? 'checked' : ''  %> />
+    <label for="CAHP" class="inline-block" >CAHP</label>
+    <input type="checkbox" id="CMFMH" name="program_list[]" value="CMFMH"class="form-checkbox" <%= @CMFMH ? 'checked' : '' %> />
+    <label for="CMFMH" class="inline-block" >CMFMH</label>
+    <input type="checkbox" id="GPR" name="program_list[]" value="GPR"class="form-checkbox" <%= @GPR ? 'checked' : '' %> />
+    <label for="GPR" class="inline-block" >GPR</label>
+    <input type="checkbox" id="LEED" name="program_list[]" value="LEED"class="form-checkbox" <%= @LEED ? 'checked' : '' %> />
+    <label for="LEED" class="inline-block" >LEED</label>
+    <input type="checkbox" id="ESTAR" name ="program_list[]" value="ESTAR"class="form-checkbox" <%= @ESTAR ? 'checked' : '' %> />
+    <label for="ESTAR" class="inline-block" >ENERGY STAR</label>
+    <input type="checkbox" id="TCAC" name ="program_list[]" value="TCAC"class="form-checkbox" <%= @TCAC ? 'checked' : '' %> />
+    <label for="TCAC" class="inline-block" >TCAC</label>
+  </div>
   <div class="form-group">
     <%= form.label :description %>
     <%= form.text_area :description, class: "form-control" %>
