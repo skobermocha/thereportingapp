@@ -14,42 +14,37 @@
           <tr>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :name, 'Name', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :location, 'Location', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :zipcode, 'Zipcode', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :climate_zone, 'Climate zone', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :jurisdiction, 'Jurisdiction', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :description, 'Description', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :utility_electricity, 'Utility electricity', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :utility_gas, 'Utility gas', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :active, 'Active', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :file_share, 'File share', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :programs, 'Programs', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :account_id, 'Account', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :active, 'Active', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
           </tr>
         </thead>
-
         <tbody>
         <% @projects.each do |project| %>
-          <tr class="group border-t border-gray-400 hover:bg-gray-100">
-                      <td class="p-3"><%= project.name %></td>
-                      <td class="p-3"><%= project.location %></td>
-                      <td class="p-3"><%= project.zipcode %></td>
-                      <td class="p-3"><%= project.climate_zone %></td>
-                      <td class="p-3"><%= project.jurisdiction %></td>
-                      <td class="p-3"><%= project.description %></td>
-                      <td class="p-3"><%= project.utility_electricity %></td>
-                      <td class="p-3"><%= project.utility_gas %></td>
-                      <td class="p-3"><%= project.active %></td>
-                      <td class="p-3"><%= project.file_share %></td>
-                      <td class="p-3"><%= project.account_id %></td>
-          
+          <tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
+            <td class="p-3"><%= project.name %></td>
+            <td class="p-3"><%= project.location %></td>
+            <td class="p-3"><%= project.climate_zone %></td>
+            <td class="p-3">
+              <% project.programs.each do |program| %>
+              <div class="rounded-full py-1 px-4 bg-primary-500 text-xs inline-block text-white font-bold leading-normal uppercase mr-2">
+                <%= program.name %>
+              </div>
+              <% end %>
+            </td>
+            <td class="p-3"><%= project.account_id %></td>
+            <td class="p-3"><%= project.active %></td>
             <td>
-              <%= link_to "View", project, class: "btn btn-link no-underline" %>
+              <%= link_to "View", project, class: "btn btn-link no-underline", :'data-target' => "table.url" %>
             </td>
           </tr>
         <% end %>
         </tbody>
       </table>
     </div>
+  </div>
 
     <% if @pagy.pages > 1 %>
       <div class="text-center my-6">

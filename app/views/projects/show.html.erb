@@ -15,15 +15,6 @@
         <%= @project.name %>
       </div>
       <div class="mb-4" id="programs">
-        <h5>Work Scopes</h5>
-        <% @project.workscopes.each do |workscope| %>
-        <div class="rounded-full py-1 px-4 bg-secondary-500 text-xs inline-block text-white font-bold leading-normal uppercase mr-2">
-        <%= workscope.name %>
-        </div>
-        <% end %>
-        <%= link_to 'Add', :anchor => "" %>
-      </div>
-      <div class="mb-4" id="programs">
         <h5>Program Enrollments</h5>
         <% @project.programs.each do |program| %>
         <div class="rounded-full py-1 px-4 bg-primary-500 text-xs inline-block text-white font-bold leading-normal uppercase mr-2">
