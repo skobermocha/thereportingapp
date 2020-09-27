@@ -1,0 +1,8 @@
+<ul class="mb-4 list-none">
+  	<li><%= project_note.text %></li>
+  	<li><%= project_note.user_id %></li>
+  	<li><%= project_note.created_at %></li>  
+    <li>
+      	<%= link_to "Edit", edit_project_project_note_path(@project, project_note), class: "btn btn-link no-underline" %>
+    </li>
+</ul>  
