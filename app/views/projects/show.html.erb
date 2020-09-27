@@ -4,6 +4,10 @@
       <h1 class="h3"><%= link_to 'Projects', projects_path %> > Project #<%= @project.id %></h1>
       <%= link_to 'Edit', edit_project_path(@project), class: "btn btn-link" %>
     </div>
+
+
+
+    
     <%= link_to 'Project Notes', project_project_notes_path(@project) %>
     <%= link_to 'Lots', project_lots_path(@project) %>
     <%= link_to 'Sample Groups', project_sample_groups_path(@project) %>
@@ -86,6 +90,30 @@
         <h5>total_lot_count</h5>
         <%= @project.total_lot_count %>
       </div>
-    </div>
+      <div data-controller="tabs" data-tabs-active-tab="-mb-px tab-active transition">
+        <ul class="list-reset list-none flex border-b">
+          <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+            <a class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline" href="#">Notes</a>
+          </li>
+          <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+            <a class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline" href="#">Lots</a>
+          </li>
+          <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+            <a class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline" href="#">CF1R's</a>
+          </li>
+        </ul>
+        <div class="hidden py-4 px-4" data-target="tabs.panel">
+          <% if @project.project_notes.any? %>
+          <%= render @project.project_notes  %>
+          <h5>Add a note</h5>
+          <%= render 'project_notes/form', project_note: @project.project_notes.build  %>
+          <% end %>
+        </div>
+        <div class="hidden py-4 px-4" data-target="tabs.panel">
+        </div>
+        <div class="hidden py-4 px-4" data-target="tabs.panel">
+        </div>
+      </div>
+    </div> 
   </div>
 </div>

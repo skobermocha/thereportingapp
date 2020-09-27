@@ -59,6 +59,6 @@ class ProjectNotesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def project_note_params
-      params.require(:project_note).permit(:note_text, :user_id, :project_id)
+      params.require(:project_note).permit(:text, :user_id, :project_id)
     end
 end

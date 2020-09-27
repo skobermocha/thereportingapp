@@ -21,16 +21,9 @@
 
         <tbody>
         <% @project_notes.each do |project_note| %>
-          <tr class="group border-t border-gray-400 hover:bg-gray-100">
-                      <td class="p-3"><%= project_note.note_text %></td>
-                      <td class="p-3"><%= project_note.user_id %></td>
-                      <td class="p-3"><%= project_note.project.name %></td>
-          
-            <td>
-              <%= link_to "View", project_project_note_path(@project, project_note), class: "btn btn-link no-underline" %>
-            </td>
-          </tr>
-        <% end %>
+          <%= render project_note %>
+        <% end %> 
+         
         </tbody>
       </table>
     </div>

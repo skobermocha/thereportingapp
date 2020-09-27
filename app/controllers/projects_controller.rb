@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1
   def show
-
+    
   end
 
   # GET /projects/new
