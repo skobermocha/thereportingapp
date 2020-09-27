@@ -12,29 +12,17 @@
       <table class="table">
         <thead>
           <tr>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @plan_types, :project_id, 'Project', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @plan_types, :name, 'Name', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @plan_types, :xml_store, 'Xml store', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @plan_types, :hers, 'Hers', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @plan_types, :model_test, 'Model test', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @project.plan_types, :project_id, 'Project', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @project.plan_types, :name, 'Name', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @project.plan_types, :xml_store, 'Xml store', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @project.plan_types, :hers, 'Hers', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @project.plan_types, :model_test, 'Model test', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
           </tr>
         </thead>
 
         <tbody>
-        <% @plan_types.each do |plan_type| %>
-          <tr class="group border-t border-gray-400 hover:bg-gray-100">
-                      <td class="p-3"><%= plan_type.project_id %></td>
-                      <td class="p-3"><%= plan_type.name %></td>
-                      <td class="p-3"><%= plan_type.xml_store %></td>
-                      <td class="p-3"><%= plan_type.hers %></td>
-                      <td class="p-3"><%= plan_type.model_test %></td>
-          
-            <td>
-              <%= link_to "View", project_plan_type_path(@project, plan_type), class: "btn btn-link no-underline" %>
-            </td>
-          </tr>
-        <% end %>
+        <%= render @project.plan_types %>
         </tbody>
       </table>
     </div>

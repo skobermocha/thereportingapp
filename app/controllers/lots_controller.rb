@@ -25,7 +25,7 @@ class LotsController < ApplicationController
     @lot = @project.lots.build(lot_params)
 
     if @lot.save
-      redirect_to @lot, notice: 'Lot was successfully created.'
+      redirect_to project_lot_path(@project, @lot), notice: 'Lot was successfully created.'
     else
       render :new
     end
@@ -34,7 +34,7 @@ class LotsController < ApplicationController
   # PATCH/PUT /lots/1
   def update
     if @lot.update(lot_params)
-      redirect_to @lot, notice: 'Lot was successfully updated.'
+      redirect_to project_lot_path(@project, @lot), notice: 'Lot was successfully updated.'
     else
       render :edit
     end

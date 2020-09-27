@@ -127,8 +127,25 @@
               <h1 class="h3">Lots</h1>
               <%= link_to 'New Lot', new_project_lot_path(@project), class: "btn btn-primary" %>
             </div>
-            <%= render @project.lots %>
+            <div class="bg-white rounded shadow table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="p-3 uppercase text-left text-xs"><%= sortable @project.lots, :project_id, 'Project', class: 'text-gray-700' %></th>
+                    <th class="p-3 uppercase text-left text-xs"><%= sortable @project.lots, :permit, 'Permit', class: 'text-gray-700' %></th>
+                    <th class="p-3 uppercase text-left text-xs"><%= sortable @project.lots, :phase, 'Phase', class: 'text-gray-700' %></th>
+                    <th class="p-3 uppercase text-left text-xs"><%= sortable @project.lots, :lot, 'Lot', class: 'text-gray-700' %></th>
+                    <th class="p-3 uppercase text-left text-xs"><%= sortable @project.lots, :address, 'Address', class: 'text-gray-700' %></th>
+                    <th class="p-3 uppercase text-left text-xs"><%= sortable @project.lots, :plan_type_id, 'Plan type', class: 'text-gray-700' %></th>
+                    <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+                  </tr>
+                </thead>
 
+                <tbody>
+                  <%= render @project.lots %>
+                </tbody>
+              </table>
+            </div>
             <% if @pagy.pages > 1 %>
               <div class="text-center my-6">
                 <%== pagy_nav(@pagy) %>
@@ -146,6 +163,49 @@
           <% end %>
         </div>
         <div class="hidden py-4 px-4" data-target="tabs.panel">
+          <div class="flex justify-between items-center mb-4">
+            <h1 class="h3">Plan Types</h1>
+
+            <% if @project.plan_types.any? %>
+              <%= link_to 'New Plan Type', new_project_plan_type_path(@project), class: "btn btn-primary" %>
+            <% end %>
+          </div>
+
+          <% if @project.plan_types.any? %>
+          <div class="bg-white rounded shadow table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @project.plan_types, :project_id, 'Project', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @project.plan_types, :name, 'Name', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @project.plan_types, :xml_store, 'Xml store', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @project.plan_types, :hers, 'Hers', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @project.plan_types, :model_test, 'Model test', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+              <%= render @project.plan_types %>
+              </tbody>
+            </table>
+          </div>  
+
+            <% if @pagy.pages > 1 %>
+              <div class="text-center my-6">
+                <%== pagy_nav(@pagy) %>
+              </div>
+            <% end %>
+
+          <% else %>
+            <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+              <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+              <div class="flex-1 text-center">
+                <p class="h3 mb-4">Create your first CF1R</p>
+                <%= link_to 'New CF1R', new_project_plan_type_path(@project), class: "btn btn-primary" %>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div> 

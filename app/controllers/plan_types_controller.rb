@@ -25,7 +25,7 @@ class PlanTypesController < ApplicationController
     @plan_type = @project.plan_types.build(plan_type_params)
 
     if @plan_type.save
-      redirect_to @plan_type, notice: 'Plan type was successfully created.'
+      redirect_to @project, notice: 'Plan type was successfully created.'
     else
       render :new
     end

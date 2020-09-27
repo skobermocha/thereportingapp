@@ -48,3 +48,7 @@ ol {
   @apply block w-full overflow-x-auto;
   -webkit-overflow-scrolling: touch;
 }
+
+.table tr {
+    cursor: pointer;
+}

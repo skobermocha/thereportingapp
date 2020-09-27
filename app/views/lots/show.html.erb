@@ -1,14 +1,14 @@
 <div class="container mx-auto my-8 px-4">
   <div class="max-w-3xl mx-auto">
     <div class="flex justify-between items-center mb-4">
-      <h1 class="h3"><%= link_to 'Lots', lots_path %> > Lot #<%= @lot.sitename %></h1>
-      <%= link_to 'Edit', edit_lot_path(@lot), class: "btn btn-link" %>
+      <h1 class="h3"><%= link_to 'Lots', project_lots_path(@project) %> > Lot #<%= @lot.sitename %></h1>
+      <%= link_to 'Edit', edit_project_lot_path(@project, @lot), class: "btn btn-link" %>
     </div>
 
     <div class="bg-white rounded shadow p-8">
             <div class="mb-4">
         <h5>Project</h5>
-        <%= @lot.project %>
+        <%= @lot.project.id %>
       </div>
             <div class="mb-4">
         <h5>Permit</h5>
@@ -28,7 +28,7 @@
       </div>
             <div class="mb-4">
         <h5>Plan type</h5>
-        <%= @lot.plan_type %>
+        <%= @lot.plan_type_id %>
       </div>
           </div>
   </div>

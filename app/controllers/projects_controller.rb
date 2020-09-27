@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1
   def show
-    
+    @pagy, @project.plan_types = pagy(PlanType.sort_by_params(params[:sort], sort_direction))
   end
 
   # GET /projects/new
