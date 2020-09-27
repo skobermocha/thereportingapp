@@ -104,12 +104,46 @@
         </ul>
         <div class="hidden py-4 px-4" data-target="tabs.panel">
           <% if @project.project_notes.any? %>
+          <div class="flex justify-between items-center mb-4">
+              <h1 class="h3">Notes</h1>
+              <%= link_to 'New Note', new_project_project_note_path(@project), class: "btn btn-primary" %>
+          </div>
           <%= render @project.project_notes  %>
           <h5>Add a note</h5>
           <%= render 'project_notes/form', project_note: @project.project_notes.build  %>
+          <% else %>
+            <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+              <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+              <div class="flex-1 text-center">
+                <p class="h3 mb-4">Create your first Note</p>
+                <%= link_to 'New Lot', new_project_project_note_path(@project), class: "btn btn-primary" %>
+              </div>
+            </div>
           <% end %>
         </div>
         <div class="hidden py-4 px-4" data-target="tabs.panel">
+          <% if @project.lots.any? %>
+            <div class="flex justify-between items-center mb-4">
+              <h1 class="h3">Lots</h1>
+              <%= link_to 'New Lot', new_project_lot_path(@project), class: "btn btn-primary" %>
+            </div>
+            <%= render @project.lots %>
+
+            <% if @pagy.pages > 1 %>
+              <div class="text-center my-6">
+                <%== pagy_nav(@pagy) %>
+              </div>
+            <% end %>
+
+          <% else %>
+            <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+              <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+              <div class="flex-1 text-center">
+                <p class="h3 mb-4">Create your first Lot</p>
+                <%= link_to 'New Lot', new_project_lot_path(@project), class: "btn btn-primary" %>
+              </div>
+            </div>
+          <% end %>
         </div>
         <div class="hidden py-4 px-4" data-target="tabs.panel">
         </div>

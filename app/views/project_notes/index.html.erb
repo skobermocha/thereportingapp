@@ -9,23 +9,11 @@
 
   <% if @project_notes.exists? %>
     <div class="bg-white rounded shadow table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @project_notes, :note_text, 'Note text', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @project_notes, :user_id, 'User', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @project_notes, :project_id, 'Project', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
-          </tr>
-        </thead>
 
-        <tbody>
         <% @project_notes.each do |project_note| %>
           <%= render project_note %>
         <% end %> 
-         
-        </tbody>
-      </table>
+
     </div>
 
     <% if @pagy.pages > 1 %>

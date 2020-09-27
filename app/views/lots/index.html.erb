@@ -1,45 +1,14 @@
 <div class="container mx-auto my-8 px-4">
   <div class="flex justify-between items-center mb-4">
-    <h1 class="h3">Lots</h1>
+  <h1 class="h3">Lots</h1>
 
-    <% if @lots.exists? %>
+  <% if @lots.exists? %>
       <%= link_to 'New Lot', new_project_lot_path(@project), class: "btn btn-primary" %>
-    <% end %>
+  <% end %>
   </div>
 
   <% if @lots.exists? %>
-    <div class="bg-white rounded shadow table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @lots, :project_id, 'Project', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @lots, :permit, 'Permit', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @lots, :phase, 'Phase', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @lots, :lot, 'Lot', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @lots, :address, 'Address', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @lots, :plan_type_id, 'Plan type', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-        <% @lots.each do |lot| %>
-          <tr class="group border-t border-gray-400 hover:bg-gray-100">
-                      <td class="p-3"><%= lot.project_id %></td>
-                      <td class="p-3"><%= lot.permit %></td>
-                      <td class="p-3"><%= lot.phase %></td>
-                      <td class="p-3"><%= lot.lot %></td>
-                      <td class="p-3"><%= lot.address %></td>
-                      <td class="p-3"><%= lot.plan_type_id %></td>
-          
-            <td>
-              <%= link_to "View", project_lot_path(@project, lot), class: "btn btn-link no-underline" %>
-            </td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
+    <%= render @project.lots %>
 
     <% if @pagy.pages > 1 %>
       <div class="text-center my-6">
