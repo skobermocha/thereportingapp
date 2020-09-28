@@ -101,6 +101,12 @@
           <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
             <a class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline" href="#">CF1R's</a>
           </li>
+          <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+            <a class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline" href="#">Contacts</a>
+          </li>
+          <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+            <a class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline" href="#">Sample Groups</a>
+          </li>
         </ul>
         <div class="hidden py-4 px-4" data-target="tabs.panel">
           <% if @project.project_notes.any? %>
@@ -206,6 +212,46 @@
               </div>
             </div>
           <% end %>
+        </div>
+        <div class="hidden py-4 px-4" data-target="tabs.panel">
+          <div class="flex justify-between items-center mb-4">
+            <h1 class="h3">Project Contacts</h1>
+            <% if @project.project_users.any? %>
+              <%= link_to 'New Project User', new_project_project_user_path(@project), class: "btn btn-primary" %>
+            <% end %>
+          </div>
+          <% if @project.project_users.any? %>
+          <div class="bg-white rounded shadow table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @project.project_users, :project_id, 'Project', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @project.project_users, :account_id, 'Account', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+              <% render @project.project_users %>
+              </tbody>
+            </table>
+          </div>
+            <% if @pagy.pages > 1 %>
+              <div class="text-center my-6">
+                <%== pagy_nav(@pagy) %>
+              </div>
+            <% end %>
+          <% else %>
+          <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+            <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+            <div class="flex-1 text-center">
+              <p class="h3 mb-4">Create your first Project Contact</p>
+              <%= link_to 'New Project User', new_project_project_user_path(@project), class: "btn btn-primary" %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        <div class="hidden py-4 px-4" data-target="tabs.panel">
+          
         </div>
       </div>
     </div> 
