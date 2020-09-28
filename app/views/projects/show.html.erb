@@ -251,7 +251,47 @@
           <% end %>
         </div>
         <div class="hidden py-4 px-4" data-target="tabs.panel">
-          
+          <div class="flex justify-between items-center mb-4">
+            <h1 class="h3">Sample Groups</h1>
+
+            <% if @project.sample_groups.any? %>
+              <%= link_to 'New Sample Group', new_project_sample_group_path(@project), class: "btn btn-primary" %>
+            <% end %>
+          </div>
+
+          <% if @project.sample_groups.any? %>
+            <div class="bg-white rounded shadow table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="p-3 uppercase text-left text-xs"><%= sortable @project.sample_groups, :project_id, 'Project', class: 'text-gray-700' %></th>
+                    <th class="p-3 uppercase text-left text-xs"><%= sortable @project.sample_groups, :lot_id, 'Lot', class: 'text-gray-700' %></th>
+                    <th class="p-3 uppercase text-left text-xs"><%= sortable @project.sample_groups, :name, 'Name', class: 'text-gray-700' %></th>
+                    <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                <% render @project.sample_groups %>
+                </tbody>
+              </table>
+            </div>
+
+            <% if @pagy.pages > 1 %>
+              <div class="text-center my-6">
+                <%== pagy_nav(@pagy) %>
+              </div>
+            <% end %>
+
+          <% else %>
+            <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+              <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+              <div class="flex-1 text-center">
+                <p class="h3 mb-4">Create your first Sample Group</p>
+                <%= link_to 'New Sample Group', new_project_sample_group_path(@project), class: "btn btn-primary" %>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div> 

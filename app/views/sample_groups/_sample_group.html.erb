@@ -1,0 +1,9 @@
+<tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
+    <td class="p-3"><%= sample_group.project_id %></td>
+    <td class="p-3"><%= sample_group.lot_id %></td>
+     <td class="p-3"><%= sample_group.name %></td>
+
+	<td>
+	  <%= link_to "View", project_sample_group_path(@project, sample_group), class: "btn btn-link no-underline", :'data-target' => "table.url" %>
+	</td>
+</tr>

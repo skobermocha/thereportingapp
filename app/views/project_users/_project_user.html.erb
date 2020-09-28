@@ -1,8 +1,8 @@
-<tr class="group border-t border-gray-400 hover:bg-gray-100">
+<tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
     <td class="p-3"><%= project_user.project_id %></td>
     <td class="p-3"><%= project_user.account_id %></td>
 
 	<td>
-		<%= link_to "View", project_project_user_path(@project, project_user), class: "btn btn-link no-underline" %>
+		<%= link_to "View", project_project_user_path(@project, project_user), class: "btn btn-link no-underline", :'data-target' => "table.url" %>
 	</td>
 </tr>

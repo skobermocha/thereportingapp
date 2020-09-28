@@ -25,7 +25,7 @@ class SampleGroupsController < ApplicationController
     @sample_group = @project.sample_groups.build(sample_group_params)
 
     if @sample_group.save
-      redirect_to @sample_group, notice: 'Sample group was successfully created.'
+      redirect_to project_path(@project), notice: 'Sample group was successfully created.'
     else
       render :new
     end
@@ -34,7 +34,7 @@ class SampleGroupsController < ApplicationController
   # PATCH/PUT /sample_groups/1
   def update
     if @sample_group.update(sample_group_params)
-      redirect_to @sample_group, notice: 'Sample group was successfully updated.'
+      redirect_to project_sample_group_path(@project), notice: 'Sample group was successfully updated.'
     else
       render :edit
     end

@@ -20,17 +20,7 @@
         </thead>
 
         <tbody>
-        <% @sample_groups.each do |sample_group| %>
-          <tr class="group border-t border-gray-400 hover:bg-gray-100">
-                      <td class="p-3"><%= sample_group.project_id %></td>
-                      <td class="p-3"><%= sample_group.lot_id %></td>
-                      <td class="p-3"><%= sample_group.name %></td>
-          
-            <td>
-              <%= link_to "View", sample_group, class: "btn btn-link no-underline" %>
-            </td>
-          </tr>
-        <% end %>
+        <% render @project.sample_groups %>
         </tbody>
       </table>
     </div>
