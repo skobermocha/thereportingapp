@@ -5,6 +5,7 @@ class ProjectUsersController < ApplicationController
   # GET /project_users
   def index
     @pagy, @project_users = pagy(ProjectUser.sort_by_params(params[:sort], sort_direction))
+
   end
 
   # GET /project_users/1

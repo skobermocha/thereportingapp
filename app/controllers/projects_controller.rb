@@ -4,13 +4,16 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   def index
-    @pagy, @projects = pagy(Project.sort_by_params(params[:sort], sort_direction))
+    @shares = ProjectUser.where(account_id: current_account.id)
+    @shared_projects = Project.joins(:project_users).merge(@shares)
+    @projects = Project.where(account_id: current_account.id).sort_by_params(params[:sort], sort_direction)
+    @pagy, @projects = pagy(@projects)
 
+    
   end
 
   # GET /projects/1
   def show
-    @pagy, @project.plan_types = pagy(PlanType.sort_by_params(params[:sort], sort_direction))
   end
 
   # GET /projects/new
@@ -63,7 +66,9 @@ class ProjectsController < ApplicationController
   # POST /projects
   def create
     @project = Project.new(project_params)
-
+    @project.projecttype_list = params[:projecttype_list]
+    @project.program_list = params[:program_list]
+    @project.account_id = current_account.id
     if @project.save
       redirect_to @project, notice: 'Project was successfully created.'
     else

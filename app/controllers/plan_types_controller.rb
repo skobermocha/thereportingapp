@@ -23,7 +23,7 @@ class PlanTypesController < ApplicationController
   # POST /plan_types
   def create
     @plan_type = @project.plan_types.build(plan_type_params)
-
+    @plan_type.project_id = @project.id
     if @plan_type.save
       redirect_to @project, notice: 'Plan type was successfully created.'
     else
@@ -34,7 +34,7 @@ class PlanTypesController < ApplicationController
   # PATCH/PUT /plan_types/1
   def update
     if @plan_type.update(plan_type_params)
-      redirect_to @plan_type, notice: 'Plan type was successfully updated.'
+      redirect_to @project, notice: 'Plan type was successfully updated.'
     else
       render :edit
     end
@@ -43,7 +43,7 @@ class PlanTypesController < ApplicationController
   # DELETE /plan_types/1
   def destroy
     @plan_type.destroy
-    redirect_to project_plan_types_url(@project), notice: 'Plan type was successfully destroyed.'
+    redirect_to @project, notice: 'Plan type was successfully destroyed.'
   end
 
   private

@@ -4,15 +4,6 @@
       <h1 class="h3"><%= link_to 'Projects', projects_path %> > Project #<%= @project.id %></h1>
       <%= link_to 'Edit', edit_project_path(@project), class: "btn btn-link" %>
     </div>
-
-
-
-    
-    <%= link_to 'Project Notes', project_project_notes_path(@project) %>
-    <%= link_to 'Lots', project_lots_path(@project) %>
-    <%= link_to 'Sample Groups', project_sample_groups_path(@project) %>
-    <%= link_to 'Project Notes', project_project_notes_path(@project) %>
-    <%= link_to 'CF1Rs', project_plan_types_path(@project) %>
     <div class="bg-white rounded shadow p-8">
       <div class="mb-4">
         <h5>Name</h5>
@@ -152,12 +143,6 @@
                 </tbody>
               </table>
             </div>
-            <% if @pagy.pages > 1 %>
-              <div class="text-center my-6">
-                <%== pagy_nav(@pagy) %>
-              </div>
-            <% end %>
-
           <% else %>
             <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
               <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
@@ -196,13 +181,6 @@
               </tbody>
             </table>
           </div>  
-
-            <% if @pagy.pages > 1 %>
-              <div class="text-center my-6">
-                <%== pagy_nav(@pagy) %>
-              </div>
-            <% end %>
-
           <% else %>
             <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
               <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
@@ -225,21 +203,16 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th class="p-3 uppercase text-left text-xs"><%= sortable @project.project_users, :project_id, 'Project', class: 'text-gray-700' %></th>
-                  <th class="p-3 uppercase text-left text-xs"><%= sortable @project.project_users, :account_id, 'Account', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @project.project_users, :account_id, 'id', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @project.project_users, :account_name, 'Company Name', class: 'text-gray-700' %></th>
                   <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
                 </tr>
               </thead>
               <tbody>
-              <% render @project.project_users %>
+              <%= render @project.project_users %>
               </tbody>
             </table>
           </div>
-            <% if @pagy.pages > 1 %>
-              <div class="text-center my-6">
-                <%== pagy_nav(@pagy) %>
-              </div>
-            <% end %>
           <% else %>
           <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
             <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
@@ -272,17 +245,10 @@
                 </thead>
 
                 <tbody>
-                <% render @project.sample_groups %>
+                <%= render @project.sample_groups %>
                 </tbody>
               </table>
             </div>
-
-            <% if @pagy.pages > 1 %>
-              <div class="text-center my-6">
-                <%== pagy_nav(@pagy) %>
-              </div>
-            <% end %>
-
           <% else %>
             <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
               <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
