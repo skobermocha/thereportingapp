@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_27_021325) do
+ActiveRecord::Schema.define(version: 2020_10_04_041847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,7 +227,6 @@ ActiveRecord::Schema.define(version: 2020_09_27_021325) do
     t.string "utility_gas"
     t.boolean "active"
     t.string "file_share"
-    t.bigint "account_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "provider"
@@ -235,7 +234,7 @@ ActiveRecord::Schema.define(version: 2020_09_27_021325) do
     t.boolean "bill_at_frame"
     t.integer "total_lot_count"
     t.string "cheers_id"
-    t.index ["account_id"], name: "index_projects_on_account_id"
+    t.bigint "owner_id"
     t.index ["name"], name: "index_projects_on_name"
   end
 

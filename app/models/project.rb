@@ -19,22 +19,22 @@
 #  zipcode             :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  account_id          :bigint
 #  cheers_id           :string
+#  owner_id            :bigint
 #
 # Indexes
 #
-#  index_projects_on_account_id  (account_id)
-#  index_projects_on_name        (name)
+#  index_projects_on_name  (name)
 #
 class Project < ApplicationRecord
 	#acts_as_tenant :account
-  	belongs_to :account
+  	#belongs_to :account
   	has_many :project_notes, dependent: :destroy
   	has_many :plan_types, dependent: :destroy
   	has_many :lots, dependent: :destroy
 	has_many :sample_groups, dependent: :destroy
   	has_many :project_users, dependent: :destroy
+  	has_many :accounts, through: :project_users
   	acts_as_taggable_on :programs, :projecttypes
 
 end

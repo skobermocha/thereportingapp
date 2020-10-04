@@ -35,7 +35,7 @@ class ProjectUsersController < ApplicationController
   # PATCH/PUT /project_users/1
   def update
     if @project_user.update(project_user_params)
-      redirect_to @project_user, notice: 'Project user was successfully updated.'
+      redirect_to project_project_user_path(@project, @project_user), notice: 'Project user was successfully updated.'
     else
       render :edit
     end

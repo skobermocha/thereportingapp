@@ -48,8 +48,8 @@ class Account < ApplicationRecord
   validates :domain, exclusion: {in: RESERVED_DOMAINS, message: :reserved}
   validates :subdomain, exclusion: {in: RESERVED_SUBDOMAINS, message: :reserved}, format: {with: /\A[a-zA-Z0-9]+[a-zA-Z0-9\-_]*[a-zA-Z0-9]+\Z/, message: :format, allow_blank: true}
 
-  has_many :project_users, dependent: :destroy
-  has_many :projects, dependent: :destroy
+  has_many :project_users
+  has_many :projects, through: :project_users
 
 
   

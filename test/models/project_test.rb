@@ -19,13 +19,12 @@
 #  zipcode             :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  account_id          :bigint
 #  cheers_id           :string
+#  owner_id            :bigint
 #
 # Indexes
 #
-#  index_projects_on_account_id  (account_id)
-#  index_projects_on_name        (name)
+#  index_projects_on_name  (name)
 #
 require 'test_helper'
 

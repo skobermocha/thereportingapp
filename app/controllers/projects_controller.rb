@@ -5,8 +5,10 @@ class ProjectsController < ApplicationController
   # GET /projects
   def index
     @shares = ProjectUser.where(account_id: current_account.id)
-    @shared_projects = Project.joins(:project_users).merge(@shares)
-    @projects = Project.where(account_id: current_account.id).sort_by_params(params[:sort], sort_direction)
+    @projects = Project.joins(:project_users).merge(@shares)
+    #@account_projects = Project.where(owner_id: current_account.id).sort_by_params(params[:sort], sort_direction)
+    #@projects = @account_projects #+ @shared_projects
+    #@projects = current_account.projects
     @pagy, @projects = pagy(@projects)
 
     
@@ -66,10 +68,17 @@ class ProjectsController < ApplicationController
   # POST /projects
   def create
     @project = Project.new(project_params)
+    @project.active = true
     @project.projecttype_list = params[:projecttype_list]
     @project.program_list = params[:program_list]
-    @project.account_id = current_account.id
+    @project.owner_id = current_account.id
+
     if @project.save
+      #create entry for first project user account
+      @project_user = ProjectUser.new
+      @project_user.project_id = @project.id
+      @project_user.account_id = current_account.id
+      @project_user.save
       redirect_to @project, notice: 'Project was successfully created.'
     else
       render :new
@@ -102,6 +111,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def project_params
-      params.require(:project).permit(:program_list, :projecttype_list, :name, :location, :zipcode, :climate_zone, :jurisdiction, :project_type, :description, :utility_electricity, :utility_gas, :active, :file_share, :account_id, :provider, :code_year, :bill_at_frame, :programs, :hvac_cf2r, :total_lot_count)
+      params.require(:project).permit(:program_list, :projecttype_list, :name, :location, :zipcode, :climate_zone, :jurisdiction, :project_type, :description, :utility_electricity, :utility_gas, :active, :file_share, :owner_id, :provider, :code_year, :bill_at_frame, :programs, :hvac_cf2r, :total_lot_count)
     end
 end

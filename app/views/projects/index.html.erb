@@ -1,9 +1,6 @@
 <div class="container mx-auto my-8 px-4">
   <div class="flex justify-between items-center mb-4">
     <h1 class="h3">Projects</h1>
-    <% @shares.each do |t| %>
-      project id = <%= t.project_id %>
-    <% end %>
     <% if @projects.exists? %>
       <%= link_to 'New Project', new_project_path, class: "btn btn-primary" %>
     <% end %>
@@ -18,8 +15,8 @@
             <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :location, 'Location', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :climate_zone, 'Climate zone', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :programs, 'Programs', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :account_id, 'Account', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :active, 'Active', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :projecttypes, 'Project Type', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @projects, :account_id, 'Owner', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
           </tr>
         </thead>
@@ -36,8 +33,14 @@
               </div>
               <% end %>
             </td>
-            <td class="p-3"><%= project.account_id %></td>
-            <td class="p-3"><%= project.active %></td>
+            <td class="p-3">
+              <% project.projecttypes.each do |type| %>
+              <div class="rounded-full py-1 px-4 bg-primary-500 text-xs inline-block text-white font-bold leading-normal uppercase mr-2">
+                <%= type.name %>
+              </div>
+              <% end %>
+            </td>
+            <td><%= Account.find(project.owner_id).name %></td>
             <td>
               <%= link_to "View", project, class: "btn btn-link no-underline", :'data-target' => "table.url" %>
             </td>
@@ -46,69 +49,11 @@
         </tbody>
       </table>
     </div>
-  </div>
-
     <% if @pagy.pages > 1 %>
       <div class="text-center my-6">
         <%== pagy_nav(@pagy) %>
       </div>
     <% end %>
-
-  <% else %>
-    <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
-      <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
-      <div class="flex-1 text-center">
-        <p class="h3 mb-4">Create your first Project</p>
-        <%= link_to 'New Project', new_project_path, class: "btn btn-primary" %>
-      </div>
-    </div>
-  <% end %>
-
-  <div class="flex justify-between items-center mb-4">
-    <h1 class="h3">Shared Projects</h1>
-    <% if @shared_projects.exists? %>
-      <%= link_to 'New Project', new_project_path, class: "btn btn-primary" %>
-    <% end %>
-  </div>
-
-  <% if @shared_projects.exists? %>
-    <div class="bg-white rounded shadow table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @shared_projects, :name, 'Name', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @shared_projects, :location, 'Location', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @shared_projects, :climate_zone, 'Climate zone', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @shared_projects, :programs, 'Programs', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @shared_projects, :account_id, 'Account', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @shared_projects, :active, 'Active', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% @shared_projects.each do |project| %>
-          <tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
-            <td class="p-3"><%= project.name %></td>
-            <td class="p-3"><%= project.location %></td>
-            <td class="p-3"><%= project.climate_zone %></td>
-            <td class="p-3">
-              <% project.programs.each do |program| %>
-              <div class="rounded-full py-1 px-4 bg-primary-500 text-xs inline-block text-white font-bold leading-normal uppercase mr-2">
-                <%= program.name %>
-              </div>
-              <% end %>
-            </td>
-            <td class="p-3"><%= project.account_id %></td>
-            <td class="p-3"><%= project.active %></td>
-            <td>
-              <%= link_to "View", project, class: "btn btn-link no-underline", :'data-target' => "table.url" %>
-            </td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
   <% else %>
     <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
       <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
