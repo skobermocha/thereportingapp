@@ -1,0 +1,72 @@
+<div class="container mx-auto my-8 px-4">
+  <div class="max-w-3xl mx-auto">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="h3"><%= link_to 'Alterations', alterations_path %> > Alteration #<%= @alteration.id %></h1>
+      <%= link_to 'Edit', edit_alteration_path(@alteration), class: "btn btn-link" %>
+    </div>
+
+    <div class="bg-white rounded shadow p-8">
+            <div class="mb-4">
+        <h5>Name</h5>
+        <%= @alteration.name %>
+      </div>
+            <div class="mb-4">
+        <h5>Address</h5>
+        <%= @alteration.address %>
+      </div>
+            <div class="mb-4">
+        <h5>City</h5>
+        <%= @alteration.city %>
+      </div>
+            <div class="mb-4">
+        <h5>Zipcode</h5>
+        <%= @alteration.zipcode %>
+      </div>
+            <div class="mb-4">
+        <h5>Jurisdiction</h5>
+        <%= @alteration.jurisdiction %>
+      </div>
+            <div class="mb-4">
+        <h5>Permit number</h5>
+        <%= @alteration.permit_number %>
+      </div>
+            <div class="mb-4">
+        <h5>Ho name</h5>
+        <%= @alteration.ho_name %>
+      </div>
+            <div class="mb-4">
+        <h5>Ho phone</h5>
+        <%= @alteration.ho_phone %>
+      </div>
+            <div class="mb-4">
+        <h5>Ho email</h5>
+        <%= @alteration.ho_email %>
+      </div>
+            <div class="mb-4">
+        <h5>Building type</h5>
+        <%= @alteration.building_type %>
+      </div>
+            <div class="mb-4">
+        <h5>Dwelling unit name</h5>
+        <%= @alteration.dwelling_unit_name %>
+      </div>
+            <div class="mb-4">
+        <h5>Dwelling unit cfa</h5>
+        <%= @alteration.dwelling_unit_cfa %>
+      </div>
+            <div class="mb-4">
+        <h5>Climate zone</h5>
+        <%= @alteration.climate_zone %>
+      </div>
+            <div class="mb-4">
+        <h5>Bedroom count</h5>
+        <%= @alteration.bedroom_count %>
+      </div>
+      <div class="mb-4">
+        <h5>Owner</h5>
+        <%= @alteration.owner_id %>
+      </div>
+          </div>
+
+  </div>
+</div>

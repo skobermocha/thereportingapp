@@ -1,0 +1,59 @@
+<div class="container mx-auto my-8 px-4">
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="h3">Alterations</h1>
+
+    <% if @alterations.any? %>
+      <%= link_to 'New Alteration', new_alteration_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+  <% if @alterations.any? %>
+    <div class="bg-white rounded shadow table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @alterations, :name, 'Name', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @alterations, :address, 'Address', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @alterations, :city, 'City', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @alterations, :building_type, 'Building type', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @alterations, :climate_zone, 'Climate zone', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @alterations, :owner, 'Owner', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @alterations.each do |alteration| %>
+          <tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
+                      <td class="p-3"><%= alteration.name %></td>
+                      <td class="p-3"><%= alteration.address %></td>
+                      <td class="p-3"><%= alteration.city %></td>
+                      <td class="p-3"><%= alteration.building_type %></td>
+                      <td class="p-3"><%= alteration.climate_zone %></td>
+                      <td class="p-3"><%= Account.find(alteration.owner_id).name %></td>
+          
+            <td>
+              <%= link_to "View", alteration, class: "btn btn-link no-underline", :'data-target' => "table.url" %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <% if @pagy.pages > 1 %>
+      <div class="text-center my-6">
+        <%== pagy_nav(@pagy) %>
+      </div>
+    <% end %>
+
+  <% else %>
+    <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+      <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+      <div class="flex-1 text-center">
+        <p class="h3 mb-4">Create your first Alteration</p>
+        <%= link_to 'New Alteration', new_alteration_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>

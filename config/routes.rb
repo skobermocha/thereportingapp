@@ -2,6 +2,12 @@
 Rails.application.routes.draw do
   
   
+  
+  
+  resources :alterations do
+    resources :alteration_notes
+    resources :alteration_users
+  end 
   resources :projects do
     resources :project_notes
     resources :plan_types

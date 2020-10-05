@@ -2,16 +2,17 @@
 #
 # Table name: lots
 #
-#  id           :bigint           not null, primary key
-#  address      :string
-#  lot          :string
-#  permit       :string
-#  phase        :string
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  cheers_id    :string
-#  plan_type_id :bigint           not null
-#  project_id   :bigint           not null
+#  id              :bigint           not null, primary key
+#  address         :string
+#  lot             :string
+#  permit          :string
+#  phase           :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  cheers_id       :string
+#  plan_type_id    :bigint           not null
+#  project_id      :bigint           not null
+#  sample_group_id :bigint
 #
 # Indexes
 #

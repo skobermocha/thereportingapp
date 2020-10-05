@@ -1,0 +1,85 @@
+<%= form_with(model: alteration) do |form| %>
+  <%= render "shared/error_messages", resource: form.object %>
+
+  <div class="form-group">
+    <%= form.hidden_field :owner_id, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :address %>
+    <%= form.text_field :address, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :city %>
+    <%= form.text_field :city, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :zipcode %>
+    <%= form.text_field :zipcode, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :jurisdiction %>
+    <%= form.text_field :jurisdiction, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :permit_number %>
+    <%= form.text_field :permit_number, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :ho_name %>
+    <%= form.text_field :ho_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :ho_phone %>
+    <%= form.text_field :ho_phone, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :ho_email %>
+    <%= form.text_field :ho_email, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :building_type %>
+    <%= form.select :building_type, [['Single family'],['Multifamily'], ['Multifamily with central water heating']] , class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :dwelling_unit_name %>
+    <%= form.text_field :dwelling_unit_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :dwelling_unit_cfa %>
+    <%= form.number_field :dwelling_unit_cfa, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :climate_zone %>
+    <%= form.text_field :climate_zone, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :bedroom_count %>
+    <%= form.text_field :bedroom_count, class: "form-control" %>
+  </div>
+
+  <div class="form-group flex justify-between">
+    <%= form.button class: "btn btn-primary" %>
+
+    <% if form.object.persisted? %>
+      <%= link_to 'Delete', form.object, class: "btn btn-danger outline", method: :delete, data: { remote: true, confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
+<% end %>

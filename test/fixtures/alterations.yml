@@ -1,0 +1,57 @@
+# == Schema Information
+#
+# Table name: alterations
+#
+#  id                 :bigint           not null, primary key
+#  address            :string
+#  bedroom_count      :string
+#  building_type      :string
+#  city               :string
+#  climate_zone       :string
+#  dwelling_unit_cfa  :integer
+#  dwelling_unit_name :string
+#  ho_email           :string
+#  ho_name            :string
+#  ho_phone           :string
+#  jurisdiction       :string
+#  name               :string
+#  permit_number      :string
+#  zipcode            :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  owner_id           :bigint
+#
+
+one:
+  owner_id: 
+  name: MyString
+  address: MyString
+  city: MyString
+  zipcode: MyString
+  jurisdiction: MyString
+  permit_number: MyString
+  ho_name: MyString
+  ho_phone: MyString
+  ho_email: MyString
+  building_type: MyString
+  dwelling_unit_name: MyString
+  dwelling_unit_cfa: 1
+  climate_zone: MyString
+  bedroom_count: MyString
+
+two:
+  owner_id: 
+  name: MyString
+  address: MyString
+  city: MyString
+  zipcode: MyString
+  jurisdiction: MyString
+  permit_number: MyString
+  ho_name: MyString
+  ho_phone: MyString
+  ho_email: MyString
+  building_type: MyString
+  dwelling_unit_name: MyString
+  dwelling_unit_cfa: 1
+  climate_zone: MyString
+  bedroom_count: MyString

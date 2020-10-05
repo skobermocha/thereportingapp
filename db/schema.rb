@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_04_041847) do
+ActiveRecord::Schema.define(version: 2020_10_04_183037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,44 @@ ActiveRecord::Schema.define(version: 2020_10_04_041847) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "alteration_notes", force: :cascade do |t|
+    t.bigint "alteration_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["alteration_id"], name: "index_alteration_notes_on_alteration_id"
+    t.index ["user_id"], name: "index_alteration_notes_on_user_id"
+  end
+
+  create_table "alteration_users", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "alteration_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_alteration_users_on_account_id"
+    t.index ["alteration_id"], name: "index_alteration_users_on_alteration_id"
+  end
+
+  create_table "alterations", force: :cascade do |t|
+    t.bigint "owner_id"
+    t.string "name"
+    t.string "address"
+    t.string "city"
+    t.string "zipcode"
+    t.string "jurisdiction"
+    t.string "permit_number"
+    t.string "ho_name"
+    t.string "ho_phone"
+    t.string "ho_email"
+    t.string "building_type"
+    t.string "dwelling_unit_name"
+    t.integer "dwelling_unit_cfa"
+    t.string "climate_zone"
+    t.string "bedroom_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "announcements", force: :cascade do |t|
     t.string "kind"
     t.string "title"
@@ -128,6 +166,7 @@ ActiveRecord::Schema.define(version: 2020_10_04_041847) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "cheers_id"
+    t.bigint "sample_group_id"
     t.index ["plan_type_id"], name: "index_lots_on_plan_type_id"
     t.index ["project_id"], name: "index_lots_on_project_id"
   end
@@ -239,13 +278,9 @@ ActiveRecord::Schema.define(version: 2020_10_04_041847) do
   end
 
   create_table "sample_groups", force: :cascade do |t|
-    t.bigint "project_id", null: false
-    t.bigint "lot_id", null: false
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["lot_id"], name: "index_sample_groups_on_lot_id"
-    t.index ["project_id"], name: "index_sample_groups_on_project_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -334,6 +369,10 @@ ActiveRecord::Schema.define(version: 2020_10_04_041847) do
   add_foreign_key "account_users", "accounts"
   add_foreign_key "account_users", "users"
   add_foreign_key "accounts", "users", column: "owner_id"
+  add_foreign_key "alteration_notes", "alterations"
+  add_foreign_key "alteration_notes", "users"
+  add_foreign_key "alteration_users", "accounts"
+  add_foreign_key "alteration_users", "alterations"
   add_foreign_key "api_tokens", "users"
   add_foreign_key "lots", "plan_types"
   add_foreign_key "lots", "projects"
@@ -342,8 +381,6 @@ ActiveRecord::Schema.define(version: 2020_10_04_041847) do
   add_foreign_key "project_notes", "users"
   add_foreign_key "project_users", "accounts"
   add_foreign_key "project_users", "projects"
-  add_foreign_key "sample_groups", "lots"
-  add_foreign_key "sample_groups", "projects"
   add_foreign_key "taggings", "tags"
   add_foreign_key "user_connected_accounts", "users"
 end

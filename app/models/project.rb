@@ -32,7 +32,7 @@ class Project < ApplicationRecord
   	has_many :project_notes, dependent: :destroy
   	has_many :plan_types, dependent: :destroy
   	has_many :lots, dependent: :destroy
-	has_many :sample_groups, dependent: :destroy
+	has_many :sample_groups, through: :lots
   	has_many :project_users, dependent: :destroy
   	has_many :accounts, through: :project_users
   	acts_as_taggable_on :programs, :projecttypes

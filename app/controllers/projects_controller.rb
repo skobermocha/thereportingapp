@@ -11,7 +11,9 @@ class ProjectsController < ApplicationController
     #@projects = current_account.projects
     @pagy, @projects = pagy(@projects)
 
-    
+    # We explicitly load the records to avoid triggering multiple DB calls in the views when checking if records exist and iterating over them.
+    # Calling @alterations.any? in the view will use the loaded records to check existence instead of making an extra DB call.
+    @projects.load
   end
 
   # GET /projects/1
