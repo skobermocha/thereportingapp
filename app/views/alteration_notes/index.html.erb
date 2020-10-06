@@ -3,7 +3,7 @@
     <h1 class="h3">Alteration Notes</h1>
 
     <% if @alteration_notes.any? %>
-      <%= link_to 'New Alteration Note', new_alteration_note_path, class: "btn btn-primary" %>
+      <%= link_to 'New Alteration Note', new_alteration_alteration_note_path, class: "btn btn-primary" %>
     <% end %>
   </div>
 
@@ -21,11 +21,12 @@
         <tbody>
         <% @alteration_notes.each do |alteration_note| %>
           <tr class="group border-t border-gray-400 hover:bg-gray-100">
-                      <td class="p-3"><%= alteration_note.alteration_id %></td>
+                      <li><%= project_note.text %></li>
                       <td class="p-3"><%= alteration_note.user_id %></td>
+                      <td class="p-3"><%= alteration_note.created_at %></td>
           
             <td>
-              <%= link_to "View", alteration_note, class: "btn btn-link no-underline" %>
+              <%= link_to "View", edit_alteration_alteration_note_path(@alteration, alteration_note), class: "btn btn-link no-underline" %>
             </td>
           </tr>
         <% end %>

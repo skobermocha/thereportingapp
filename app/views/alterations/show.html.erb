@@ -4,69 +4,129 @@
       <h1 class="h3"><%= link_to 'Alterations', alterations_path %> > Alteration #<%= @alteration.id %></h1>
       <%= link_to 'Edit', edit_alteration_path(@alteration), class: "btn btn-link" %>
     </div>
-
     <div class="bg-white rounded shadow p-8">
-            <div class="mb-4">
-        <h5>Name</h5>
-        <%= @alteration.name %>
+      <!-- project details area -->
+      <div>
+        <div class="mb-4">
+          <h5>Name</h5>
+          <%= @alteration.name %>
+        </div>
+        <div class="mb-4">
+          <h5>Address</h5>
+          <%= @alteration.address %>
+        </div>
+        <div class="mb-4">
+          <h5>City</h5>
+          <%= @alteration.city %>
+        </div>
+        <div class="mb-4">
+          <h5>Zipcode</h5>
+          <%= @alteration.zipcode %>
+        </div>
+        <div class="mb-4">
+          <h5>Jurisdiction</h5>
+          <%= @alteration.jurisdiction %>
+        </div>
+        <div class="mb-4">
+          <h5>Permit number</h5>
+          <%= @alteration.permit_number %>
+        </div>
+        <div class="mb-4">
+          <h5>Ho name</h5>
+          <%= @alteration.ho_name %>
+        </div>
+        <div class="mb-4">
+          <h5>Ho phone</h5>
+          <%= @alteration.ho_phone %>
+        </div>
+        <div class="mb-4">
+          <h5>Ho email</h5>
+          <%= @alteration.ho_email %>
+        </div>
+        <div class="mb-4">
+          <h5>Building type</h5>
+          <%= @alteration.building_type %>
+        </div>
+        <div class="mb-4">
+          <h5>Dwelling unit name</h5>
+          <%= @alteration.dwelling_unit_name %>
+        </div>
+        <div class="mb-4">
+          <h5>Dwelling unit cfa</h5>
+          <%= @alteration.dwelling_unit_cfa %>
+        </div>
+        <div class="mb-4">
+          <h5>Climate zone</h5>
+          <%= @alteration.climate_zone %>
+        </div>
+        <div class="mb-4">
+          <h5>Bedroom count</h5>
+          <%= @alteration.bedroom_count %>
+        </div>
+        <div class="mb-4">
+          <h5>Owner</h5>
+          <%= @alteration.owner_id %>
+        </div>
       </div>
-            <div class="mb-4">
-        <h5>Address</h5>
-        <%= @alteration.address %>
-      </div>
-            <div class="mb-4">
-        <h5>City</h5>
-        <%= @alteration.city %>
-      </div>
-            <div class="mb-4">
-        <h5>Zipcode</h5>
-        <%= @alteration.zipcode %>
-      </div>
-            <div class="mb-4">
-        <h5>Jurisdiction</h5>
-        <%= @alteration.jurisdiction %>
-      </div>
-            <div class="mb-4">
-        <h5>Permit number</h5>
-        <%= @alteration.permit_number %>
-      </div>
-            <div class="mb-4">
-        <h5>Ho name</h5>
-        <%= @alteration.ho_name %>
-      </div>
-            <div class="mb-4">
-        <h5>Ho phone</h5>
-        <%= @alteration.ho_phone %>
-      </div>
-            <div class="mb-4">
-        <h5>Ho email</h5>
-        <%= @alteration.ho_email %>
-      </div>
-            <div class="mb-4">
-        <h5>Building type</h5>
-        <%= @alteration.building_type %>
-      </div>
-            <div class="mb-4">
-        <h5>Dwelling unit name</h5>
-        <%= @alteration.dwelling_unit_name %>
-      </div>
-            <div class="mb-4">
-        <h5>Dwelling unit cfa</h5>
-        <%= @alteration.dwelling_unit_cfa %>
-      </div>
-            <div class="mb-4">
-        <h5>Climate zone</h5>
-        <%= @alteration.climate_zone %>
-      </div>
-            <div class="mb-4">
-        <h5>Bedroom count</h5>
-        <%= @alteration.bedroom_count %>
-      </div>
-      <div class="mb-4">
-        <h5>Owner</h5>
-        <%= @alteration.owner_id %>
-      </div>
+      <!-- Tabs area -->
+      <div data-controller="tabs" data-tabs-active-tab="-mb-px tab-active transition">
+        <ul class="list-reset list-none flex border-b">
+          <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+            <a class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline" href="#">Notes</a>
+          </li>
+          <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+            <a class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline" href="#">Contacts</a>
+          </li>
+        </ul>
+        <div class="hidden py-4 px-4" data-target="tabs.panel">
+          <% if @alteration.alteration_notes.any? %>
+          <div class="flex justify-between items-center mb-4">
+              <h1 class="h3">Notes</h1>
+              <%= link_to 'New Note', new_alteration_alteration_note_path(@alteration), class: "btn btn-primary" %>
           </div>
-
+          <%= render @alteration.alteration_notes  %>
+          <h5>Add a note</h5>
+          <%= render 'alteration_notes/form', alteration_note: @alteration.alteration_notes.build  %>
+          <% else %>
+            <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+              <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+              <div class="flex-1 text-center">
+                <p class="h3 mb-4">Create your first Note</p>
+                <%= link_to 'New Note', new_alteration_alteration_note_path(@alteration), class: "btn btn-primary" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="hidden py-4 px-4" data-target="tabs.panel">
+          <% if @alteration.alteration_users.any? %>
+          <div class="flex justify-between items-center mb-4">
+            <h1 class="h3">alteration Contacts</h1>
+              <%= link_to 'Add Contact', new_alteration_alteration_user_path(@alteration), class: "btn btn-primary" %>
+          </div>
+          <div class="bg-white rounded shadow table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @alteration.alteration_users, :account_id, 'id', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @alteration.alteration_users, :account_name, 'Company Name', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+              <%= render @alteration.alteration_users %>
+              </tbody>
+            </table>
+          </div>
+          <% else %>
+          <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+            <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+            <div class="flex-1 text-center">
+              <p class="h3 mb-4">Add your first contact</p>
+              <%= link_to 'Add Contact', new_alteration_alteration_user_path(@alteration), class: "btn btn-primary" %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+    </div>
   </div>
 </div>

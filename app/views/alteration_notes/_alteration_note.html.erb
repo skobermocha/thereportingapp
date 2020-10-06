@@ -1,0 +1,8 @@
+<ul class="mb-4 list-none">
+  	<li><%= alteration_note.text %></li>
+  	<li><%= User.find(alteration_note.user_id).name %></li>
+  	<li><%= alteration_note.created_at.strftime("%^b %-e, %Y at %I:%M") %></li>  
+    <li>
+      	<%= link_to "Edit", edit_alteration_alteration_note_path(@alteration, alteration_note), class: "btn btn-link no-underline" %>
+    </li>
+</ul>  

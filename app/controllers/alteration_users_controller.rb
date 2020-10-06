@@ -17,7 +17,7 @@ class AlterationUsersController < ApplicationController
 
   # GET /alteration_users/new
   def new
-    @alteration_user = AlterationUser.new
+    @alteration_user = @alteraion.alteration_user.build
   end
 
   # GET /alteration_users/1/edit
@@ -26,8 +26,8 @@ class AlterationUsersController < ApplicationController
 
   # POST /alteration_users
   def create
-    @alteration_user = AlterationUser.new(alteration_user_params)
-    @alteration_user.alteration_id = params[:alteration_id]
+    @alteration_user = @alteraion.alteration_user.build(alteration_user_params)
+    
     if @alteration_user.save
       redirect_to alteration_path(@alteration), notice: "Alteration user was successfully created."
     else
@@ -38,7 +38,7 @@ class AlterationUsersController < ApplicationController
   # PATCH/PUT /alteration_users/1
   def update
     if @alteration_user.update(alteration_user_params)
-      redirect_to alteration_path(@alteration), notice: "Alteration user was successfully updated."
+      redirect_to alteration_alteration_user_path(@alteration), notice: "Alteration user was successfully updated."
     else
       render :edit
     end
@@ -47,7 +47,7 @@ class AlterationUsersController < ApplicationController
   # DELETE /alteration_users/1
   def destroy
     @alteration_user.destroy
-    redirect_to alteration_url, notice: "Alteration user was successfully destroyed."
+    redirect_to alteration_alteration_user_path(@alteration), notice: "Alteration user was successfully destroyed."
   end
 
   private
