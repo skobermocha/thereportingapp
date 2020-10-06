@@ -18,7 +18,7 @@
 
   <div class="form-group">
     <%= form.label :climate_zone %>
-    <%= form.text_field :climate_zone, class: "form-control" %>
+    <%= form.select :climate_zone, [['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['10'],['11'],['12'],['13'],['14'],['15'],['16']], class: "form-control" %>
   </div>
 
   <div class="form-group">
@@ -61,18 +61,20 @@
 
   <div class="form-group">
     <%= form.label :utility_electricity %>
-    <%= form.text_field :utility_electricity, class: "form-control" %>
+    <%= form.select :utility_electricity, [['PG&E'],['SCE'],['SDG&E'],['SMUD'],['TID'],['MID']], class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= form.label :utility_gas %>
-    <%= form.text_field :utility_gas, class: "form-control" %>
+    <%= form.select :utility_gas, [['PG&E'],['SoCal Gas'],['SDG&E']], class: "form-control" %>
   </div>
 
+  <% if form.object.persisted? %>
   <div class="form-group">
-    <%= form.label :active %>
-    <%= form.check_box :active, class: "form-control" %>
+    <%= form.check_box :active, class: "form-checkbox" %>
+    <%= form.label :active, class: "inline-block" %>
   </div>
+  <% end %>
 
   <div class="form-group">
     <%= form.label :file_share %>
@@ -80,8 +82,7 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :owner_id %>
-    <%= form.text_field :owner_id, class: "form-control" %>
+    <%= form.hidden_field :owner_id, class: "form-control" %>
   </div>
 
   <div class="form-group flex justify-between">

@@ -5,82 +5,86 @@
       <%= link_to 'Edit', edit_project_path(@project), class: "btn btn-link" %>
     </div>
     <div class="bg-white rounded shadow p-8">
-      <div class="mb-4">
-        <h5>Name</h5>
-        <%= @project.name %>
-      </div>
-      <div class="mb-4" id="programs">
-        <h5>Program Enrollments</h5>
-        <% @project.programs.each do |program| %>
-        <div class="rounded-full py-1 px-4 bg-primary-500 text-xs inline-block text-white font-bold leading-normal uppercase mr-2">
-        <%= program.name %>
+      <!-- project details area -->
+      <div>
+        <div class="mb-4">
+          <h5>Name</h5>
+          <%= @project.name %>
         </div>
-        <% end %>
-      </div>
-      <div class="mb-4">
-        <h5>Location</h5>
-        <%= @project.location %>
-      </div>
-      <div class="mb-4">
-        <h5>Zipcode</h5>
-        <%= @project.zipcode %>
-      </div>
-      <div class="mb-4">
-        <h5>Climate zone</h5>
-        <%= @project.climate_zone %>
-      </div>
-      <div class="mb-4">
-        <h5>Jurisdiction</h5>
-        <%= @project.jurisdiction %>
-      </div>
-      <div class="mb-4" id="project_types">
-        <h5>Project type</h5>
-          <% @project.projecttypes.each do |projecttype| %>
+        <div class="mb-4" id="programs">
+          <h5>Program Enrollments</h5>
+          <% @project.programs.each do |program| %>
           <div class="rounded-full py-1 px-4 bg-primary-500 text-xs inline-block text-white font-bold leading-normal uppercase mr-2">
-          <%= projecttype.name %>
+          <%= program.name %>
           </div>
           <% end %>
+        </div>
+        <div class="mb-4">
+          <h5>Location</h5>
+          <%= @project.location %>
+        </div>
+        <div class="mb-4">
+          <h5>Zipcode</h5>
+          <%= @project.zipcode %>
+        </div>
+        <div class="mb-4">
+          <h5>Climate zone</h5>
+          <%= @project.climate_zone %>
+        </div>
+        <div class="mb-4">
+          <h5>Jurisdiction</h5>
+          <%= @project.jurisdiction %>
+        </div>
+        <div class="mb-4" id="project_types">
+          <h5>Project type</h5>
+            <% @project.projecttypes.each do |projecttype| %>
+            <div class="rounded-full py-1 px-4 bg-primary-500 text-xs inline-block text-white font-bold leading-normal uppercase mr-2">
+            <%= projecttype.name %>
+            </div>
+            <% end %>
+        </div>
+        <div class="mb-4">
+          <h5>Description</h5>
+          <%= @project.description %>
+        </div>
+        <div class="mb-4">
+          <h5>Utility electricity</h5>
+          <%= @project.utility_electricity %>
+        </div>
+        <div class="mb-4">
+          <h5>Utility gas</h5>
+          <%= @project.utility_gas %>
+        </div>
+        <div class="mb-4">
+          <h5>Active</h5>
+          <%= @project.active %>
+        </div>
+        <div class="mb-4">
+          <h5>File share</h5>
+          <%= @project.file_share %>
+        </div>
+        <div class="mb-4">
+          <h5>Owner</h5>
+          <%= @project.owner_id %>
+        </div>
+        <div class="mb-4">
+          <h5>Provider</h5>
+          <%= @project.provider %>
+        </div>
+        <div class="mb-4">
+          <h5>code_year</h5>
+          <%= @project.code_year %>
+        </div>
+        <div class="mb-4">
+          <h5>bill_at_frame</h5>
+          <%= @project.bill_at_frame %>
+        </div>
+        <div class="mb-4">
+          <h5>total_lot_count</h5>
+          <%= @project.total_lot_count %>
+        </div>
       </div>
-      <div class="mb-4">
-        <h5>Description</h5>
-        <%= @project.description %>
-      </div>
-      <div class="mb-4">
-        <h5>Utility electricity</h5>
-        <%= @project.utility_electricity %>
-      </div>
-      <div class="mb-4">
-        <h5>Utility gas</h5>
-        <%= @project.utility_gas %>
-      </div>
-      <div class="mb-4">
-        <h5>Active</h5>
-        <%= @project.active %>
-      </div>
-      <div class="mb-4">
-        <h5>File share</h5>
-        <%= @project.file_share %>
-      </div>
-      <div class="mb-4">
-        <h5>Owner</h5>
-        <%= @project.owner_id %>
-      </div>
-      <div class="mb-4">
-        <h5>Provider</h5>
-        <%= @project.provider %>
-      </div>
-      <div class="mb-4">
-        <h5>code_year</h5>
-        <%= @project.code_year %>
-      </div>
-      <div class="mb-4">
-        <h5>bill_at_frame</h5>
-        <%= @project.bill_at_frame %>
-      </div>
-      <div class="mb-4">
-        <h5>total_lot_count</h5>
-        <%= @project.total_lot_count %>
-      </div>
+      <!-- Tabs area -->
       <div data-controller="tabs" data-tabs-active-tab="-mb-px tab-active transition">
         <ul class="list-reset list-none flex border-b">
           <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
