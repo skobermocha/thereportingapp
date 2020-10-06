@@ -4,8 +4,10 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   def index
-    @shares = ProjectUser.where(account_id: current_account.id)
-    @projects = Project.joins(:project_users).merge(@shares)
+    @shared_projects = ProjectUser.where(account_id: current_account.id)
+    @account_projects = Project.where(owner_id: current_account.id)
+    @account_projects = @account_projects.active_status(params[:active_status]) if params[:active_status]   
+    @projects = @account_projects.joins(:project_users).merge(@shared_projects)
     #@account_projects = Project.where(owner_id: current_account.id).sort_by_params(params[:sort], sort_direction)
     #@projects = @account_projects #+ @shared_projects
     #@projects = current_account.projects
@@ -113,6 +115,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def project_params
-      params.require(:project).permit(:program_list, :projecttype_list, :name, :location, :zipcode, :climate_zone, :jurisdiction, :project_type, :description, :utility_electricity, :utility_gas, :active, :file_share, :owner_id, :provider, :code_year, :bill_at_frame, :programs, :hvac_cf2r, :total_lot_count)
+      params.require(:project).permit(:active_status, :program_list, :projecttype_list, :name, :location, :zipcode, :climate_zone, :jurisdiction, :project_type, :description, :utility_electricity, :utility_gas, :active, :file_share, :owner_id, :provider, :code_year, :bill_at_frame, :programs, :hvac_cf2r, :total_lot_count)
     end
 end

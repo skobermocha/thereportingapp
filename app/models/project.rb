@@ -37,4 +37,6 @@ class Project < ApplicationRecord
   	has_many :accounts, through: :project_users
   	acts_as_taggable_on :programs, :projecttypes
 
+  	#scopes
+  	scope :active_status, -> (active_status) { where(active: active_status) }
 end

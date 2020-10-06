@@ -6,6 +6,10 @@ class ProjectNotesController < ApplicationController
   # GET /project_notes
   def index
     @pagy, @project_notes = pagy(ProjectNote.sort_by_params(params[:sort], sort_direction))
+
+    # We explicitly load the records to avoid triggering multiple DB calls in the views when checking if records exist and iterating over them.
+    # Calling @alteration_notes.any? in the view will use the loaded records to check existence instead of making an extra DB call.
+    @project_notes.load
   end
 
   # GET /project_notes/1

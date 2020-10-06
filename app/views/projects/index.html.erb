@@ -1,12 +1,17 @@
 <div class="container mx-auto my-8 px-4">
   <div class="flex justify-between items-center mb-4">
     <h1 class="h3">Projects</h1>
-    <% if @projects.exists? %>
+    <% if @projects.any? %>
+<!--       <div class="btn-group btn-group-sm" role="group" aria-label="active_status">
+      <%= link_to 'All', projects_path, class: "btn btn-secondary" %>
+      <%= link_to 'Active', projects_path(active_status: true), class: "btn btn-secondary" %>
+      <%= link_to 'Inactive', projects_path(active_status: false), class: "btn btn-secondary" %>
+      </div> -->
       <%= link_to 'New Project', new_project_path, class: "btn btn-primary" %>
     <% end %>
   </div>
 
-  <% if @projects.exists? %>
+  <% if @projects.any? %>
     <div class="bg-white rounded shadow table-responsive">
       <table class="table">
         <thead>
@@ -40,7 +45,7 @@
               </div>
               <% end %>
             </td>
-            <td><%= Account.find(project.owner_id).name %></td>
+            <td class="p-3"><%= Account.find(project.owner_id).name %></td>
             <td>
               <%= link_to "View", project, class: "btn btn-link no-underline", :'data-target' => "table.url" %>
             </td>
