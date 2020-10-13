@@ -1,0 +1,27 @@
+<div class="container mx-auto my-8 px-4">
+  <div class="max-w-3xl mx-auto">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="h3"><%= link_to 'Services Booked', appointment_services_booked_path(@appointment) %> > Services Booked #<%= @services_booked.id %></h1>
+      <%= link_to 'Edit', edit_appointment_service_booked_path(@service_booked), class: "btn btn-link" %>
+    </div>
+
+    <div class="bg-white rounded shadow p-8">
+            <div class="mb-4">
+        <h5>Appointment</h5>
+        <%= @service_booked.appointment %>
+      </div>
+            <div class="mb-4">
+        <h5>Service</h5>
+        <%= @service_booked.service %>
+      </div>
+            <div class="mb-4">
+        <h5>Price</h5>
+        <%= @service_booked.price %>
+      </div>
+            <div class="mb-4">
+        <h5>Status</h5>
+        <%= @service_booked.status %>
+      </div>
+          </div>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+module CoolingTypesHelper
+end

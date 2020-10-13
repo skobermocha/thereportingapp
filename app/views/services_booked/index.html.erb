@@ -1,0 +1,55 @@
+<div class="container mx-auto my-8 px-4">
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="h3">Services Booked</h1>
+
+    <% if @services_booked.any? %>
+      <%= link_to 'New Services Booked', new_appointment_service_booked_path(@appointment), class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+  <% if @services_booked.any? %>
+    <div class="bg-white rounded shadow table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @services_booked, :appointment, 'Appointment', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @services_booked, :service, 'Service', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @services_booked, :price, 'Price', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @services_booked, :status, 'Status', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @services_booked.each do |service_booked| %>
+          <tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
+                      <td class="p-3"><%= service_booked.appointment_id %></td>
+                      <td class="p-3"><%= service_booked.service_id %></td>
+                      <td class="p-3"><%= service_booked.price %></td>
+                      <td class="p-3"><%= service_booked.status %></td>
+          
+            <td>
+              <%= link_to "View", appointment_service_booked(service_booked), class: "btn btn-link no-underline", :'data-target' => "table.url" %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <% if @pagy.pages > 1 %>
+      <div class="text-center my-6">
+        <%== pagy_nav(@pagy) %>
+      </div>
+    <% end %>
+
+  <% else %>
+    <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+      <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+      <div class="flex-1 text-center">
+        <p class="h3 mb-4">Book your first Service</p>
+        <%= link_to 'New Services Booked', new_appointment_service_booked_path(@appointment), class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>

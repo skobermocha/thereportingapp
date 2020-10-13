@@ -1,0 +1,15 @@
+<div class="container mx-auto my-8 px-4">
+  <div class="max-w-3xl mx-auto">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="h3"><%= link_to 'Heating Types', heating_types_path %> > Heating Type #<%= @heating_type.id %></h1>
+      <%= link_to 'Edit', edit_heating_type_path(@heating_type), class: "btn btn-link" %>
+    </div>
+
+    <div class="bg-white rounded shadow p-8">
+            <div class="mb-4">
+        <h5>Name</h5>
+        <%= @heating_type.name %>
+      </div>
+          </div>
+  </div>
+</div>

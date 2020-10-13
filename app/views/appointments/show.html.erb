@@ -1,0 +1,69 @@
+<div class="container mx-auto my-8 px-4">
+  <div class="max-w-3xl mx-auto">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="h3"><%= link_to 'Appointments', appointments_path %> > Appointment #<%= @appointment.id %></h1>
+      <%= link_to 'Edit', edit_appointment_path(@appointment), class: "btn btn-link" %>
+    </div>
+
+    <div class="bg-white rounded shadow p-8">
+      <div class="mb-4">
+        <h5>Alteration</h5>
+        <%= @appointment.alteration_id %>
+      </div>
+      <div class="mb-4">
+        <h5>User</h5>
+        <%= @appointment.user_id %>
+      </div>
+      <div class="mb-4">
+        <h5>User created</h5>
+        <%= @appointment.user_created_id %>
+      </div>
+      <div class="mb-4">
+        <h5>Contact name</h5>
+        <%= @appointment.contact_name %>
+      </div>
+      <div class="mb-4">
+        <h5>Contact phone</h5>
+        <%= @appointment.contact_phone %>
+      </div>
+      <div class="mb-4">
+        <h5>Start time</h5>
+        <%= @appointment.start_time %>
+      </div>
+      <div class="mb-4">
+        <h5>End time</h5>
+        <%= @appointment.end_time %>
+      </div>
+      <div class="mb-4">
+        <h5>Systems</h5>
+        <% if @appointment.systems.any? %>
+          <div class="bg-white rounded shadow table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @appointment.systems, :alteration_id, 'Alteration', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @appointment.systems, :name, 'Name', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+              <% @appointment.systems.each do |system| %>
+                <tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
+                            <td class="p-3"><%= system.alteration_id %></td>
+                            <td class="p-3"><%= system.name %></td>
+                
+                  <td>
+                    <%= link_to "View", alteration_system_path(@appointment.alteration_id, system), class: "btn btn-link no-underline", :'data-target' => "table.url" %>
+                  </td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

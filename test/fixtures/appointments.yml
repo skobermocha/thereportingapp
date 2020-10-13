@@ -1,0 +1,42 @@
+# == Schema Information
+#
+# Table name: appointments
+#
+#  id              :bigint           not null, primary key
+#  contact_name    :string
+#  contact_phone   :string
+#  end_time        :datetime
+#  start_time      :datetime
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  alteration_id   :bigint
+#  user_created_id :integer
+#  user_id         :bigint
+#
+# Indexes
+#
+#  index_appointments_on_alteration_id  (alteration_id)
+#  index_appointments_on_user_id        (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (alteration_id => alterations.id)
+#
+
+one:
+  alteration: 
+  user: 
+  user_created_id: 1
+  contact_name: MyString
+  contact_phone: MyString
+  start_time: 2020-10-07 21:38:52
+  end_time: 2020-10-07 21:38:52
+
+two:
+  alteration: 
+  user: 
+  user_created_id: 1
+  contact_name: MyString
+  contact_phone: MyString
+  start_time: 2020-10-07 21:38:52
+  end_time: 2020-10-07 21:38:52

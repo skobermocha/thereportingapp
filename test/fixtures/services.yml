@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: services
+#
+#  id         :bigint           not null, primary key
+#  active     :boolean
+#  duration   :integer
+#  name       :string
+#  price      :decimal(, )
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+one:
+  name: MyString
+  duration: 1
+  price: 9.99
+  active: false
+
+two:
+  name: MyString
+  duration: 1
+  price: 9.99
+  active: false
