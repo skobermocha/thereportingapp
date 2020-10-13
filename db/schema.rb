@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_04_183037) do
+ActiveRecord::Schema.define(version: 2020_10_09_031012) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -156,6 +156,32 @@ ActiveRecord::Schema.define(version: 2020_10_04_183037) do
     t.index ["user_id"], name: "index_api_tokens_on_user_id"
   end
 
+  create_table "appointments", force: :cascade do |t|
+    t.bigint "alteration_id"
+    t.bigint "user_id"
+    t.integer "user_created_id"
+    t.string "contact_name"
+    t.string "contact_phone"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["alteration_id"], name: "index_appointments_on_alteration_id"
+    t.index ["user_id"], name: "index_appointments_on_user_id"
+  end
+
+  create_table "cooling_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "heating_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "lots", force: :cascade do |t|
     t.bigint "project_id", null: false
     t.string "permit"
@@ -283,6 +309,88 @@ ActiveRecord::Schema.define(version: 2020_10_04_183037) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "services", force: :cascade do |t|
+    t.string "name"
+    t.integer "duration"
+    t.decimal "price"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "services_booked", force: :cascade do |t|
+    t.bigint "appointment_id"
+    t.bigint "service_id"
+    t.decimal "price"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["appointment_id"], name: "index_services_booked_on_appointment_id"
+    t.index ["service_id"], name: "index_services_booked_on_service_id"
+  end
+
+  create_table "services_needed", force: :cascade do |t|
+    t.bigint "system_id"
+    t.bigint "service_id"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["service_id"], name: "index_services_needed_on_service_id"
+    t.index ["system_id"], name: "index_services_needed_on_system_id"
+  end
+
+  create_table "systems", force: :cascade do |t|
+    t.bigint "alteration_id"
+    t.string "name"
+    t.string "area_served"
+    t.integer "cfa_served"
+    t.boolean "ducted_system"
+    t.boolean "new_refrigerant_components"
+    t.boolean "installing_new_components"
+    t.boolean "installing_40_ft_ducts"
+    t.boolean "entirely_new_system"
+    t.string "alteration_type"
+    t.bigint "heating_type_id"
+    t.string "altered_heating_component"
+    t.string "heating_efficiency_type"
+    t.string "heating_efficiency_value"
+    t.bigint "cooling_type_id"
+    t.string "altered_cooling_component"
+    t.string "cooling_efficiency_type"
+    t.string "cooling_efficiency_value"
+    t.string "heating_make"
+    t.string "heating_model"
+    t.string "heating_serial"
+    t.integer "heating_capacity"
+    t.string "coil_make"
+    t.string "coil_model"
+    t.string "coil_serial"
+    t.integer "coil_capacity"
+    t.string "condenser_make"
+    t.string "condenser_model"
+    t.string "condenser_serial"
+    t.integer "condenser_capacity"
+    t.string "condenser_speed_type"
+    t.string "zonal_control_type"
+    t.boolean "new_ducts_installed"
+    t.integer "total_new_duct_length"
+    t.string "new_supply_location"
+    t.string "new_supply_rvalue"
+    t.string "new_return_location"
+    t.string "new_return_rvalue"
+    t.string "exception_to_min_rvalue"
+    t.string "airflow_method"
+    t.boolean "airflow_protocols_usable"
+    t.boolean "fanwatt_protocols_usable"
+    t.string "ductleakge_exemption"
+    t.boolean "ducts_in_garage"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["alteration_id"], name: "index_systems_on_alteration_id"
+    t.index ["cooling_type_id"], name: "index_systems_on_cooling_type_id"
+    t.index ["heating_type_id"], name: "index_systems_on_heating_type_id"
+  end
+
   create_table "taggings", id: :serial, force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
@@ -374,6 +482,7 @@ ActiveRecord::Schema.define(version: 2020_10_04_183037) do
   add_foreign_key "alteration_users", "accounts"
   add_foreign_key "alteration_users", "alterations"
   add_foreign_key "api_tokens", "users"
+  add_foreign_key "appointments", "alterations"
   add_foreign_key "lots", "plan_types"
   add_foreign_key "lots", "projects"
   add_foreign_key "plan_types", "projects"
@@ -381,6 +490,11 @@ ActiveRecord::Schema.define(version: 2020_10_04_183037) do
   add_foreign_key "project_notes", "users"
   add_foreign_key "project_users", "accounts"
   add_foreign_key "project_users", "projects"
+  add_foreign_key "services_booked", "appointments"
+  add_foreign_key "services_booked", "services"
+  add_foreign_key "services_needed", "services"
+  add_foreign_key "services_needed", "systems"
+  add_foreign_key "systems", "alterations"
   add_foreign_key "taggings", "tags"
   add_foreign_key "user_connected_accounts", "users"
 end

@@ -25,4 +25,8 @@ class Alteration < ApplicationRecord
 	has_many :alteration_users
 	has_many :accounts, through: :aleration_users
 	has_many :alteration_notes
+	has_many :systems
+	has_many :services_needed, through: :systems
+	has_many :appointments
+	has_many :services_booked, through: :appointments
 end

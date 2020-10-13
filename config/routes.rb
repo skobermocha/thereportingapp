@@ -3,10 +3,15 @@ Rails.application.routes.draw do
   
   
   
-  
+  resources :appointments do
+    resources :services_booked
+  end
+
   resources :alterations do
     resources :alteration_notes
     resources :alteration_users
+    resources :systems
+    resources :services_needed
   end 
   resources :projects do
     resources :project_notes
@@ -15,6 +20,11 @@ Rails.application.routes.draw do
     resources :sample_groups
     resources :project_users
   end
+  
+  resources :services
+  resources :cooling_types
+  resources :heating_types
+
   # Jumpstart views
   if Rails.env.development? || Rails.env.test?
     mount Jumpstart::Engine, at: "/jumpstart"

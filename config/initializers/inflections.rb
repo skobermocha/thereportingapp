@@ -11,6 +11,8 @@
 # end
 
 # These inflection rules are supported but not enabled by default:
-# ActiveSupport::Inflector.inflections(:en) do |inflect|
+ ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
-# end
+	inflect.irregular 'service_booked', 'services_booked'
+	inflect.irregular 'service_needed', 'services_needed'
+ end
