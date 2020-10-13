@@ -21,12 +21,12 @@
 
         <tbody>
         <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
-          <tr class="group border-t border-gray-400 hover:bg-gray-100">
+          <tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
           <% attributes.reject(&:password_digest?).each do |attribute| -%>
             <td class="p-3"><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
           <% end %>
             <td>
-              <%%= link_to "View", <%= singular_table_name %>, class: "btn btn-link no-underline" %>
+              <%%= link_to "View", <%= singular_table_name %>, class: "btn btn-link no-underline", :'data-target' => "table.url" %>
             </td>
           </tr>
         <%% end %>
