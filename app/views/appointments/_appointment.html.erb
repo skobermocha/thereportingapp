@@ -1,0 +1,13 @@
+<tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
+  <td class="p-3"><%= appointment.alteration_id %></td>
+  <td class="p-3"><%= appointment.user_id %></td>
+  <td class="p-3"><%= appointment.user_created_id %></td>
+  <td class="p-3"><%= appointment.contact_name %></td>
+  <td class="p-3"><%= appointment.contact_phone %></td>
+  <td class="p-3"><%= appointment.start_time %></td>
+  <td class="p-3"><%= appointment.end_time %></td>
+
+<td>
+  <%= link_to "View", appointment, class: "btn btn-link no-underline", :'data-target' => "table.url" %>
+</td>
+</tr>

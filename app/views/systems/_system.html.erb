@@ -1,0 +1,12 @@
+<tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
+    <td class="p-3"><%= system.alteration_id %></td>
+    <td class="p-3"><%= system.name %></td>
+    <td class="p-3">
+    	<% system.services_needed.each do |service| %>
+          <%= service.service.name %> (<%= service.status %>)<br>
+        <% end %>
+  	</td>
+<td>
+  <%= link_to "View", alteration_system_path(@alteration, system), class: "btn btn-link no-underline", :'data-target' => "table.url" %>
+</td>
+</tr>
