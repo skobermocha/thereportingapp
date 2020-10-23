@@ -28,5 +28,5 @@ class Alteration < ApplicationRecord
 	has_many :systems
 	has_many :services_needed, through: :systems
 	has_many :appointments
-	has_many :services_booked, through: :appointments
+	has_many :services_booked, through: :appointments 
 end

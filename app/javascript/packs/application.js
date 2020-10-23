@@ -33,6 +33,7 @@ import LocalTime from "local-time"
 LocalTime.start()
 
 // ADD YOUR JAVACSRIPT HERE
+import "src/system_service_logic"
 
 // Start Rails UJS
 Rails.start()

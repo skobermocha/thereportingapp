@@ -2,7 +2,7 @@
   <div class="max-w-3xl mx-auto">
     <div class="flex justify-between items-center mb-4">
       <h1 class="h3">Edit Service</h1>
-      <%= link_to 'Cancel', @service_needed, class: "btn btn-link" %>
+      <%= link_to 'Cancel', alteration_system_service_needed_path(@alteration, @system, @service_needed), class: "btn btn-link" %>
     </div>
 
     <div class="bg-white rounded shadow p-8">

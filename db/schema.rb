@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_09_031012) do
+ActiveRecord::Schema.define(version: 2020_10_21_231416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -325,6 +325,7 @@ ActiveRecord::Schema.define(version: 2020_10_09_031012) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "system_id"
     t.index ["appointment_id"], name: "index_services_booked_on_appointment_id"
     t.index ["service_id"], name: "index_services_booked_on_service_id"
   end
@@ -335,6 +336,7 @@ ActiveRecord::Schema.define(version: 2020_10_09_031012) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "target"
     t.index ["service_id"], name: "index_services_needed_on_service_id"
     t.index ["system_id"], name: "index_services_needed_on_system_id"
   end
@@ -351,11 +353,9 @@ ActiveRecord::Schema.define(version: 2020_10_09_031012) do
     t.boolean "entirely_new_system"
     t.string "alteration_type"
     t.bigint "heating_type_id"
-    t.string "altered_heating_component"
     t.string "heating_efficiency_type"
     t.string "heating_efficiency_value"
     t.bigint "cooling_type_id"
-    t.string "altered_cooling_component"
     t.string "cooling_efficiency_type"
     t.string "cooling_efficiency_value"
     t.string "heating_make"

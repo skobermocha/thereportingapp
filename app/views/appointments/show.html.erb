@@ -35,35 +35,78 @@
         <%= @appointment.end_time %>
       </div>
       <div class="mb-4">
-        <h5>Systems</h5>
         <% if @appointment.systems.any? %>
+        <% @appointment.systems.each do |system| %>
+        <h5>System: <%= system.name %></h5>
           <div class="bg-white rounded shadow table-responsive">
             <table class="table">
               <thead>
                 <tr>
-                  <th class="p-3 uppercase text-left text-xs"><%= sortable @appointment.systems, :alteration_id, 'Alteration', class: 'text-gray-700' %></th>
-                  <th class="p-3 uppercase text-left text-xs"><%= sortable @appointment.systems, :name, 'Name', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"></th>
+                  <th class="p-3 uppercase text-left text-xs">Req. Verifications</th>
+                  <th class="p-3 uppercase text-left text-xs">Status</th>
                   <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
                 </tr>
               </thead>
 
               <tbody>
-              <% @appointment.systems.each do |system| %>
-                <tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
-                            <td class="p-3"><%= system.alteration_id %></td>
-                            <td class="p-3"><%= system.name %></td>
-                
+                <% system.services_needed.each do |service| %>
+                <tr class="group border-t border-gray-400 hover:bg-gray-100" >
+                  <td class="p-3">
+                      <%= check_box_tag 'service_needed', service.id,  service.status != 'Completed', :class=> 'form-checkbox' %>
+                  </td>
+                  <td class="p-3"><%= service.service.name %></td>
+                  <td class="p-3"><%= service.status %></td>              
                   <td>
-                    <%= link_to "View", alteration_system_path(@appointment.alteration_id, system), class: "btn btn-link no-underline", :'data-target' => "table.url" %>
+                    <%= link_to "View", alteration_system_service_needed_path(system.alteration_id, system, service), class: "btn btn-link no-underline", :'data-target' => "table.url" %>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="flex justify-between items-center mb-4">
+        <%= link_to 'Add', new_appointment_service_booked_path(@appointment), class: "btn btn-link" %>
+      </div>
+      <div class="mb-4">
+        <h5>Services Booked</h5>
+        <% if @appointment.services_booked.any? %>
+          <div class="bg-white rounded shadow table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @appointment.services_booked, :system_id, 'System', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @appointment.services_booked, :service_id, 'Service', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @appointment.services_booked, :duration, 'Duration', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs">Status</th>
+                  <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+              <% @appointment.services_booked.each do |service| %>
+                <tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
+                            <td class="p-3"><%= System.find(service.system_id).name %></td>
+                            <td class="p-3"><%= Service.find(service.service_id).name %></td>
+                            <td class="p-3"><%= Service.find(service.service_id).duration %></td>
+                            <td class="p-3"><%= service.status %></td>                
+                  <td>
+                    <%= link_to "View", appointment_service_booked_path(@appointment, service), class: "btn btn-link no-underline", :'data-target' => "table.url" %>
                   </td>
                 </tr>
               <% end %>
               </tbody>
             </table>
           </div>
+          <% else %>
+          <div class="bg-white rounded shadow table-responsive">
+            No Services Booked Yet.
+          </div>
         <% end %>
       </div>
-
     </div>
   </div>
 </div>

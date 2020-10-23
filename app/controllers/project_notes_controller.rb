@@ -1,11 +1,12 @@
 class ProjectNotesController < ApplicationController
+  before_action :authenticate_user!
   before_action :get_project
   before_action :set_project_note, only: [:show, :edit, :update, :destroy]
   
 
   # GET /project_notes
   def index
-    @pagy, @project_notes = pagy(ProjectNote.sort_by_params(params[:sort], sort_direction))
+    @pagy, @project_notes = pagy(ProjectNote.where(project_id: params[:project_id]).sort_by_params(params[:sort], sort_direction))
 
     # We explicitly load the records to avoid triggering multiple DB calls in the views when checking if records exist and iterating over them.
     # Calling @alteration_notes.any? in the view will use the loaded records to check existence instead of making an extra DB call.

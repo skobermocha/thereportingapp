@@ -1,6 +1,6 @@
 <tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
     <td class="p-3"><%= alteration_user.account_id %></td>
-    <td class="p-3"><%= Account.find(alteration_user.account_id).name %></td>
+    <td class="p-3"><%= alteration_user.account.name %></td>
 
 	<td>
 		<%= link_to "View", alteration_alteration_user_path(@alteration, alteration_user), class: "btn btn-link no-underline", :'data-target' => "table.url" %>

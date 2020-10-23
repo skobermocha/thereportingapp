@@ -1,10 +1,11 @@
 class PlanTypesController < ApplicationController
+  before_action :authenticate_user!
   before_action :get_project
   before_action :set_plan_type, only: [:show, :edit, :update, :destroy]
 
   # GET /plan_types
   def index
-    @pagy, @plan_types = pagy(PlanType.sort_by_params(params[:sort], sort_direction))
+    @pagy, @plan_types = pagy(PlanType.where(project_id: params[:project_id]).sort_by_params(params[:sort], sort_direction))
   end
 
   # GET /plan_types/1

@@ -11,4 +11,5 @@
 #  updated_at :datetime         not null
 #
 class Service < ApplicationRecord
+	has_many :services_needed
 end

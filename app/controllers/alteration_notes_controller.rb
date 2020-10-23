@@ -1,4 +1,5 @@
 class AlterationNotesController < ApplicationController
+  before_action :authenticate_user!
   before_action :get_alteration
   before_action :set_alteration_note, only: [:show, :edit, :update, :destroy]
 

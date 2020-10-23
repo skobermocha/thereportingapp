@@ -1,4 +1,5 @@
 class HeatingTypesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_heating_type, only: [:show, :edit, :update, :destroy]
 
   # GET /heating_types

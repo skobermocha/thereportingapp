@@ -13,7 +13,8 @@
         <thead>
           <tr>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @services_booked, :appointment, 'Appointment', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @services_booked, :service, 'Service', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @services_booked, :system_id, 'System', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @services_booked, :service_id, 'Service', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @services_booked, :price, 'Price', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @services_booked, :status, 'Status', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
@@ -24,12 +25,13 @@
         <% @services_booked.each do |service_booked| %>
           <tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
                       <td class="p-3"><%= service_booked.appointment_id %></td>
+                      <td class="p-3"><%= service_booked.system_id %></td>
                       <td class="p-3"><%= service_booked.service_id %></td>
                       <td class="p-3"><%= service_booked.price %></td>
                       <td class="p-3"><%= service_booked.status %></td>
           
             <td>
-              <%= link_to "View", appointment_service_booked(service_booked), class: "btn btn-link no-underline", :'data-target' => "table.url" %>
+              <%= link_to "View", appointment_service_booked_path(@appointment, service_booked), class: "btn btn-link no-underline", :'data-target' => "table.url" %>
             </td>
           </tr>
         <% end %>

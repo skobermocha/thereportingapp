@@ -1,4 +1,5 @@
 class AlterationUsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :get_alteration
   before_action :set_alteration_user, only: [:show, :edit, :update, :destroy]
 

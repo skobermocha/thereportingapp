@@ -6,14 +6,37 @@
     </div>
 
     <div class="bg-white rounded shadow p-8">
-            <div class="mb-4">
+      <div class="mb-4">
         <h5>Alteration</h5>
         <%= @system.alteration.id %>
       </div>
-            <div class="mb-4">
+      <div class="mb-4">
         <h5>Name</h5>
         <%= @system.name %>
       </div>
+
+      <div class="mb-4">
+        <h5>Req. Verifications</h5>
+        <% @system.services_needed.each do |service| %>
+          <%= service.service.name %> (<%= service.status %>)<br>
+        <% end %>
+      </div>
+      <div class="mb-4">
+        <h5>Altered Heating Components</h5>
+      <% @system.altered_heating_components.each do |component| %>
+          <div class="rounded-full py-1 px-4 bg-primary-500 text-xs inline-block text-white font-bold leading-normal uppercase mr-2">
+          <%= component.name %>
           </div>
+      <% end %>
+      </div>
+      <div class="mb-4">
+        <h5>Altered Cooling Components</h5>
+      <% @system.altered_cooling_components.each do |component| %>
+          <div class="rounded-full py-1 px-4 bg-primary-500 text-xs inline-block text-white font-bold leading-normal uppercase mr-2">
+          <%= component.name %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

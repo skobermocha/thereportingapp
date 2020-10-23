@@ -6,8 +6,6 @@
 #  airflow_method             :string
 #  airflow_protocols_usable   :boolean
 #  alteration_type            :string
-#  altered_cooling_component  :string
-#  altered_heating_component  :string
 #  area_served                :string
 #  cfa_served                 :integer
 #  coil_capacity              :integer

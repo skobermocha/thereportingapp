@@ -3,7 +3,7 @@
     <h1 class="h3">Services Needed</h1>
 
     <% if @services_needed.any? %>
-      <%= link_to 'New Services needed', new_system_service_needed_path(@system), class: "btn btn-primary" %>
+      <%= link_to 'New Services needed', new_alteration_system_service_needed_path(@system), class: "btn btn-primary" %>
     <% end %>
   </div>
 
@@ -14,8 +14,8 @@
           <tr>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @services_needed, :system, 'system', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @services_needed, :service, 'Service', class: 'text-gray-700' %></th>
-            <th class="p-3 uppercase text-left text-xs"><%= sortable @services_needed, :price, 'Price', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs"><%= sortable @services_needed, :status, 'Status', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @services_needed, :target, 'Status', class: 'text-gray-700' %></th>
             <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
           </tr>
         </thead>
@@ -24,12 +24,12 @@
         <% @services_needed.each do |service_needed| %>
           <tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
                       <td class="p-3"><%= service_needed.system_id %></td>
-                      <td class="p-3"><%= service_needed.service_id %></td>
-                      <td class="p-3"><%= service_needed.price %></td>
+                      <td class="p-3"><%= service_needed.service.name %></td>
                       <td class="p-3"><%= service_needed.status %></td>
+                      <td class="p-3"><%= service_needed.target %></td>
           
             <td>
-              <%= link_to "View", system_service_needed(service_needed), class: "btn btn-link no-underline", :'data-target' => "table.url" %>
+              <%= link_to "View", alteration_system_service_needed_path(@alteration, @system, service_needed), class: "btn btn-link no-underline", :'data-target' => "table.url" %>
             </td>
           </tr>
         <% end %>
@@ -48,7 +48,7 @@
       <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
       <div class="flex-1 text-center">
         <p class="h3 mb-4">Book your first Service</p>
-        <%= link_to 'New Services needed', new_system_service_needed_path(@system), class: "btn btn-primary" %>
+        <%= link_to 'New Services needed', new_alteration_system_service_needed_path(@system), class: "btn btn-primary" %>
       </div>
     </div>
   <% end %>

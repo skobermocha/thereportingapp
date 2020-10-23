@@ -1,21 +1,89 @@
 <%= form_with(model: [@alteration, system]) do |form| %>
   <%= render "shared/error_messages", resource: form.object %>
 
+  <%= form.hidden_field :alteration_id, class: "form-control" %>
   <div class="form-group">
-    <%= form.label :alteration %>
-    <%= form.text_field :alteration_id, class: "form-control" %>
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control", value: form.object.name || "System " + (@alteration.systems.count.to_i + 1).to_s %>
+  </div>
+  <div class="form-group">
+    <%= form.label :area_served %>
+    <%= form.text_field :area_served, class: "form-control", value: form.object.area_served ||  "Location " + (@alteration.systems.count.to_i + 1).to_s %>
+  </div>
+  <div class="form-group">
+    <%= form.label :cfa_served %>
+    <%= form.text_field :cfa_served, class: "form-control", value: form.object.cfa_served ||  (@alteration.dwelling_unit_cfa.to_i - @alteration.systems.sum(:cfa_served).to_i).to_s %>
+  </div>
+  <div class="form-group">
+    <%= form.check_box :ducted_system, class: "form-checkbox", onclick: "myFunction()" %>
+    <%= form.label :ducted_system, 'Yes, the system is ducted.', class: 'inline-block' %>
+  </div>
+  <div class="form-group">
+    <%= form.check_box :installing_40_ft_ducts, class: "form-checkbox only-if-ducted", disabled: !(@system.ducted_system) %>
+    <%= form.label :installing_40_ft_ducts, 'Yes, more than 40ft of new or replacement ducts are being installed.', class: 'inline-block' %>
+  </div>
+  <div class="form-group only-if-ducted">
+    <%= form.check_box :new_ducts_installed, class: "form-checkbox only-if-ducted", disabled: !(@system.ducted_system) %>
+    <%= form.label :new_ducts_installed, 'Yes, the duct system is entirely new.', class: 'inline-block' %>
+  </div>
+  <div class="form-group">
+    <%= form.check_box :new_refrigerant_components, class: "form-checkbox" %>
+    <%= form.label :new_refrigerant_components, 'Yes, new refrigerant containing components are being installed.', class: 'inline-block' %>
+  </div>
+  <div class="form-group">
+    <%= form.check_box :installing_new_components, class: "form-checkbox" %>
+    <%= form.label :installing_new_components, 'Yes, new equipment is being installed.', class: 'inline-block' %>
+  </div>
+  <div class="form-group">
+    <%= form.check_box :entirely_new_system, class: "form-checkbox", onclick: "AllNewSystem()" %>
+    <%= form.label :entirely_new_system, 'Yes, all of the equipment is entirely new.', class: 'inline-block' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: "form-control" %>
+    <%= form.label :heating_type_id %>
+    <%= form.collection_select :heating_type_id, HeatingType.all, :id, :name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= form.label :altered_heating_component %>
+    <% @heating_component_list.each do |component| %>
+    <input type="checkbox" id="<%= component %>" name="altered_heating_component_list[]" value="<%= component %>" class="form-checkbox" <%= 'checked' unless !(@system.altered_heating_component_list.include? component) %> />
+    <label for="<%= component %>" class="inline-block" ><%= component %></label>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= form.label :heating_efficiency_type %>
+    <%= form.select :heating_efficiency_type, [['AFUE'],['HSPF'],['COP']], class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= form.label :heating_efficiency_value %>
+    <%= form.text_field :heating_efficiency_value, class: "form-control", value: form.object.heating_efficiency_value || '0.80' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :cooling_type_id %>
+    <%= form.collection_select :cooling_type_id, CoolingType.all, :id, :name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= form.label :altered_cooling_component %>
+    <% @cooling_component_list.each do |component| %>
+    <input type="checkbox" id="<%= component %>" name="altered_cooling_component_list[]" value="<%= component %>" class="form-checkbox" <%= 'checked' unless !(@system.altered_cooling_component_list.include? component) %> />
+    <label for="<%= component %>" class="inline-block" ><%= component %></label>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= form.label :cooling_efficiency_type %>
+    <%= form.select :cooling_efficiency_type, [['SEER'],['EER'],['CEER']], class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= form.label :cooling_efficiency_value %>
+    <%= form.text_field :cooling_efficiency_value, class: "form-control", value: form.object.cooling_efficiency_value || '14' %>
   </div>
 
   <div class="form-group flex justify-between">
     <%= form.button class: "btn btn-primary" %>
 
     <% if form.object.persisted? %>
-      <%= link_to 'Delete', alteration_system_path(@alteration,@system), class: "btn btn-danger outline", method: :delete, data: { remote: true, confirm: "Are you sure?" } %>
+      <%= link_to 'Delete', alteration_system_path(@alteration, system), class: "btn btn-danger outline", method: :delete, data: { remote: true, confirm: "Are you sure?" } %>
     <% end %>
   </div>
 <% end %>

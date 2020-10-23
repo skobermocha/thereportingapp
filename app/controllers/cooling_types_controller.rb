@@ -1,4 +1,5 @@
 class CoolingTypesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_cooling_type, only: [:show, :edit, :update, :destroy]
 
   # GET /cooling_types

@@ -1,10 +1,11 @@
 class ServicesBookedController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_appointment
   before_action :set_service_booked, only: [:show, :edit, :update, :destroy]
 
   # GET /services_bookeds
   def index
-    @pagy, @services_booked = pagy(ServiceBooked.sort_by_params(params[:sort], sort_direction))
+    @pagy, @services_booked = pagy(ServiceBooked.where(appointment_id: params[:appointment_id]).sort_by_params(params[:sort], sort_direction))
 
     # We explicitly load the records to avoid triggering multiple DB calls in the views when checking if records exist and iterating over them.
     # Calling @services_bookeds.any? in the view will use the loaded records to check existence instead of making an extra DB call.
@@ -37,7 +38,7 @@ class ServicesBookedController < ApplicationController
 
   # PATCH/PUT /services_bookeds/1
   def update
-    if @services_booked.update(service_booked_params)
+    if @service_booked.update(service_booked_params)
       redirect_to appointment_services_booked_path(@appointment), notice: "Services booked was successfully updated."
     else
       render :edit
@@ -47,7 +48,7 @@ class ServicesBookedController < ApplicationController
   # DELETE /services_bookeds/1
   def destroy
     @service_booked.destroy
-    redirect_to appointment_services_booked(@appointment), notice: "Services booked was successfully destroyed."
+    redirect_to appointment_services_booked_path(@appointment), notice: "Services booked was successfully destroyed."
   end
 
   private
@@ -63,6 +64,6 @@ class ServicesBookedController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def service_booked_params
-    params.require(:service_booked).permit(:appointment_id, :service_id, :price, :status)
+    params.require(:service_booked).permit(:appointment_id, :system_id, :service_id, :price, :status)
   end
 end

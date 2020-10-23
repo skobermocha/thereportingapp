@@ -36,6 +36,11 @@
     <%= form.text_field :end_time, class: "form-control", data: { controller: :flatpickr, flatpickr_enable_time: true, flatpickr_alt_input: true, flatpickr_alt_format: t("time.formats.long") } %>
   </div>
 
+  <% form.fields_for :services_booked do |form| %>
+  <%= render 'service_fields', form: form %>
+  <% end %>
+
+
   <div class="form-group flex justify-between">
     <%= form.button class: "btn btn-primary" %>
 

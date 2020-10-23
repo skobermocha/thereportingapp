@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   resources :alterations do
     resources :alteration_notes
     resources :alteration_users
-    resources :systems
+    resources :systems do
     resources :services_needed
+    end
   end 
   resources :projects do
     resources :project_notes

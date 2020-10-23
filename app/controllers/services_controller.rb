@@ -1,4 +1,5 @@
 class ServicesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_service, only: [:show, :edit, :update, :destroy]
 
   # GET /services
@@ -26,7 +27,7 @@ class ServicesController < ApplicationController
   # POST /services
   def create
     @service = Service.new(service_params)
-
+    @service.active = true
     if @service.save
       redirect_to @service, notice: "Service was successfully created."
     else

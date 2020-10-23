@@ -10,5 +10,5 @@ export default class extends Controller {
   get url() {
     return this.targets.find('url').href
   }
-
+  
 }

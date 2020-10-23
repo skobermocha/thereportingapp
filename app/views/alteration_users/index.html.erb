@@ -21,7 +21,7 @@
         <tbody>
         <% @alteration_users.each do |alteration_user| %>
           <tr class="group border-t border-gray-400 hover:bg-gray-100">
-                      <td class="p-3"><%= Account.find(alteration_user.account_id).name %></td>
+                      <td class="p-3"><%= alteration_user.account.name %></td>
                       <td class="p-3"><%= alteration_user.alteration_id %></td>
           
             <td>

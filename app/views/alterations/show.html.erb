@@ -72,12 +72,88 @@
       <div data-controller="tabs" data-tabs-active-tab="-mb-px tab-active transition">
         <ul class="list-reset list-none flex border-b">
           <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+            <a class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline" href="#">Systems</a>
+          </li>
+          <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
+            <a class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline" href="#">Appointments</a>
+          </li>
+          <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
             <a class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline" href="#">Notes</a>
           </li>
           <li class="mr-1" data-target="tabs.tab" data-action="click->tabs#change">
             <a class="inline-block py-2 px-4 text-primary hover:text-blue-800 font-semibold no-underline" href="#">Contacts</a>
           </li>
         </ul>
+        <div class="hidden py-4 px-4" data-target="tabs.panel">
+          <% if @alteration.systems.any? %>
+          <div class="flex justify-between items-center mb-4">
+              <h1 class="h3">Systems</h1>
+              <%= link_to 'New System', new_alteration_system_path(@alteration), class: "btn btn-primary" %>
+          </div>
+          <div class="bg-white rounded shadow table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @alteration.systems, :alteration_id, 'Alteration', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @alteration.systems, :name, 'Name', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @alteration.systems, :name, 'Req. Verifications', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+              <%= render @alteration.systems  %>
+              </tbody>
+            </table>
+          </div>
+          <% else %>
+            <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+              <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+              <div class="flex-1 text-center">
+                <p class="h3 mb-4">Add your first system</p>
+                <%= link_to 'New System', new_alteration_system_path(@alteration), class: "btn btn-primary" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="hidden py-4 px-4" data-target="tabs.panel">
+          <% if @alteration.appointments.any? %>
+          <div class="flex justify-between items-center mb-4">
+              <h1 class="h3">Appointments</h1>
+              <%= link_to 'New Appointment', new_appointment_path(@alteration), class: "btn btn-primary" %>
+          </div>
+          <div class="bg-white rounded shadow table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @alteration.appointments, :alteration_id, 'alteration_id', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @alteration.appointments, :user_id, 'user_id', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @alteration.appointments, :user_created_id, 'user_id created', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @alteration.appointments, :contact_name, 'Contact name', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @alteration.appointments, :contact_phone, 'Contact phone', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @alteration.appointments, :start_time, 'Start time', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs"><%= sortable @alteration.appointments, :end_time, 'End time', class: 'text-gray-700' %></th>
+                  <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+              <%= render @alteration.appointments  %>
+              </tbody>
+            </table>
+          </div>
+          <h5>Add a appointment</h5>
+              <%= render 'appointments/form', appointment: @alteration.appointments.build  %>
+          <% else %>
+            <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+              <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+              <div class="flex-1 text-center">
+                <p class="h3 mb-4">Create your first appointment</p>
+                <%= link_to 'New appointment', new_appointment_path(@alteration), class: "btn btn-primary" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
         <div class="hidden py-4 px-4" data-target="tabs.panel">
           <% if @alteration.alteration_notes.any? %>
           <div class="flex justify-between items-center mb-4">

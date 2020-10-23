@@ -1,10 +1,11 @@
 class LotsController < ApplicationController
+  before_action :authenticate_user!
   before_action :get_project
   before_action :set_lot, only: [:show, :edit, :update, :destroy]
 
   # GET /lots
   def index
-    @pagy, @lots = pagy(Lot.sort_by_params(params[:sort], sort_direction))
+    @pagy, @lots = pagy(Lot.where(project_id: params[:project_id]).sort_by_params(params[:sort], sort_direction))
   end
 
   # GET /lots/1

@@ -1,4 +1,5 @@
 class SampleGroupsController < ApplicationController
+  before_action :authenticate_user!
   before_action :get_project
   before_action :set_sample_group, only: [:show, :edit, :update, :destroy]
 

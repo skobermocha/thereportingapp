@@ -6,8 +6,6 @@
 #  airflow_method             :string
 #  airflow_protocols_usable   :boolean
 #  alteration_type            :string
-#  altered_cooling_component  :string
-#  altered_heating_component  :string
 #  area_served                :string
 #  cfa_served                 :integer
 #  coil_capacity              :integer
@@ -62,8 +60,10 @@
 #
 class System < ApplicationRecord
 	belongs_to :alteration
-	has_many :services_needed
+	has_many :services_needed, dependent: :destroy
 	has_one :heating_type
 	has_one :cooling_type
 	has_many :apointments, through: :alterations
+	acts_as_taggable_on :altered_heating_components, :altered_cooling_components
+	accepts_nested_attributes_for :services_needed
 end
