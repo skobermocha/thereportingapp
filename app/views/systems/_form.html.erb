@@ -15,7 +15,7 @@
     <%= form.text_field :cfa_served, class: "form-control", value: form.object.cfa_served ||  (@alteration.dwelling_unit_cfa.to_i - @alteration.systems.sum(:cfa_served).to_i).to_s %>
   </div>
   <div class="form-group">
-    <%= form.check_box :ducted_system, class: "form-checkbox", onclick: "ductSystem()" %>
+    <%= form.check_box :ducted_system, class: "form-checkbox", onclick: "ductedSystem()" %>
     <%= form.label :ducted_system, 'Yes, the system is ducted.', class: 'inline-block' %>
   </div>
   <div class="form-group">
