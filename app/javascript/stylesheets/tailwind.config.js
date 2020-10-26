@@ -9,6 +9,16 @@ module.exports = {
     //})
   ],
 
+  // Purge unused TailwindCSS styles
+  purge: {
+    enabled: true,
+    content: [
+      './**/*.html.erb',
+      './app/helpers/**/*.rb',
+      './app/javascript/**/*.js',
+    ],
+  },
+
   // All the default values will be compiled unless they are overridden below
   theme: {
     // Extend (add to) the default theme in the `extend` key
