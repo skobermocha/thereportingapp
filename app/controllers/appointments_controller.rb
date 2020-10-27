@@ -4,7 +4,11 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments
   def index
-    @pagy, @appointments = pagy(Appointment.sort_by_params(params[:sort], sort_direction))
+    @shared_alterations = AlterationUser.where(account_id: current_account.id)
+    @account_alterations = Alteration.where(owner_id: current_account.id)
+    @alterations = @account_alterations.joins(:alteration_users).merge(@shared_alterations)
+    @appointments = Appointment.where(alteration_id: @alterations)
+    @pagy, @appointments = pagy(@appointments.sort_by_params(params[:sort], sort_direction))
 
     # We explicitly load the records to avoid triggering multiple DB calls in the views when checking if records exist and iterating over them.
     # Calling @appointments.any? in the view will use the loaded records to check existence instead of making an extra DB call.
@@ -17,6 +21,7 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/new
   def new
+    @alteration = Alteration.find (params[:alteration_id])
     @appointment = Appointment.new
   end
 

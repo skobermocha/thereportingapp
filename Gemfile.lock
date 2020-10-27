@@ -111,6 +111,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    acts-as-taggable-on (6.5.0)
+      activerecord (>= 5.0, < 6.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     administrate-field-active_storage (0.3.5)
@@ -405,6 +407,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on (~> 6.0)
   acts_as_tenant!
   administrate!
   administrate-field-active_storage (~> 0.3.0)
@@ -437,7 +440,7 @@ DEPENDENCIES
   pg_search (~> 2.3)
   pry-rails
   puma (~> 5.0)
-  rails (~> 6.0.0)
+  rails (~> 6.0.3)
   receipts (~> 1.0.0)
   redis (~> 4.0)
   ruby-oembed (~> 0.13.0)

@@ -8,15 +8,19 @@
     <div class="bg-white rounded shadow p-8">
       <div class="mb-4">
         <h5>Alteration</h5>
-        <%= @appointment.alteration_id %>
+        <%= @appointment.alteration.name %>
+      </div>
+      <div class="mb-4">
+        <h5>Address</h5>
+        <%= @appointment.alteration.address + ', ' + @appointment.alteration.city %>
       </div>
       <div class="mb-4">
         <h5>User</h5>
-        <%= @appointment.user_id %>
+        <%= User.find(@appointment.user_created_id).name %>
       </div>
       <div class="mb-4">
         <h5>User created</h5>
-        <%= @appointment.user_created_id %>
+        <%= User.find(@appointment.user_id).name %>
       </div>
       <div class="mb-4">
         <h5>Contact name</h5>
@@ -33,43 +37,6 @@
       <div class="mb-4">
         <h5>End time</h5>
         <%= @appointment.end_time %>
-      </div>
-      <div class="mb-4">
-        <% if @appointment.systems.any? %>
-        <% @appointment.systems.each do |system| %>
-        <h5>System: <%= system.name %></h5>
-          <div class="bg-white rounded shadow table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th class="p-3 uppercase text-left text-xs"></th>
-                  <th class="p-3 uppercase text-left text-xs">Req. Verifications</th>
-                  <th class="p-3 uppercase text-left text-xs">Status</th>
-                  <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <% system.services_needed.each do |service| %>
-                <tr class="group border-t border-gray-400 hover:bg-gray-100" >
-                  <td class="p-3">
-                      <%= check_box_tag 'service_needed', service.id,  service.status != 'Completed', :class=> 'form-checkbox' %>
-                  </td>
-                  <td class="p-3"><%= service.service.name %></td>
-                  <td class="p-3"><%= service.status %></td>              
-                  <td>
-                    <%= link_to "View", alteration_system_service_needed_path(system.alteration_id, system, service), class: "btn btn-link no-underline", :'data-target' => "table.url" %>
-                  </td>
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-          <% end %>
-        <% end %>
-      </div>
-      <div class="flex justify-between items-center mb-4">
-        <%= link_to 'Add', new_appointment_service_booked_path(@appointment), class: "btn btn-link" %>
       </div>
       <div class="mb-4">
         <h5>Services Booked</h5>
@@ -89,9 +56,9 @@
               <tbody>
               <% @appointment.services_booked.each do |service| %>
                 <tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
-                            <td class="p-3"><%= System.find(service.system_id).name %></td>
-                            <td class="p-3"><%= Service.find(service.service_id).name %></td>
-                            <td class="p-3"><%= Service.find(service.service_id).duration %></td>
+                            <td class="p-3"><%= service.system.name %></td>
+                            <td class="p-3"><%= service.service.name %></td>
+                            <td class="p-3"><%= service.service.duration %></td>
                             <td class="p-3"><%= service.status %></td>                
                   <td>
                     <%= link_to "View", appointment_service_booked_path(@appointment, service), class: "btn btn-link no-underline", :'data-target' => "table.url" %>
@@ -103,7 +70,13 @@
           </div>
           <% else %>
           <div class="bg-white rounded shadow table-responsive">
-            No Services Booked Yet.
+            <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+              <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+              <div class="flex-1 text-center">
+                <p class="h3 mb-4">Book your first Service</p>
+                <%= link_to 'New Services Booked', new_appointment_service_booked_path(@appointment), class: "btn btn-primary" %>
+              </div>
+            </div>
           </div>
         <% end %>
       </div>
