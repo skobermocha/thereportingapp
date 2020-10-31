@@ -22,7 +22,13 @@ class AppointmentsController < ApplicationController
   # GET /appointments/new
   def new
     @alteration = Alteration.find (params[:alteration_id])
-    @appointment = Appointment.new
+    if @alteration.systems.any?
+      @duration = 0
+      @appointment = Appointment.new
+    else
+      redirect_to @alteration, notice: "The alteration needs a system defined before you can schedule an appointment."
+    end
+
   end
 
   # GET /appointments/1/edit

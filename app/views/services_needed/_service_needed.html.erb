@@ -1,0 +1,14 @@
+
+          <tr class="group border-t border-gray-400 hover:bg-gray-100" >
+            <td class="p-3">
+                <%= check_box_tag service_needed.service_id, service_needed.service_id,  service_needed.status != 'Completed', class: 'form-checkbox', name: "services_selected_list[]" %>
+            </td>
+            <td class="p-3"><%= service_needed.service.name %></td>
+            <td class="p-3"><%= service_needed.status %></td>              
+            <td>
+              <%= link_to "View", alteration_system_service_needed_path(@alteration, service_needed.system, service_needed), class: "btn btn-link no-underline", :'data-target' => "table.url" %>
+            </td>
+          </tr>
+          <% if service_needed.status != 'Completed' %>
+           <% @duration += service_needed.service.duration.to_i %>
+           <% end %>
