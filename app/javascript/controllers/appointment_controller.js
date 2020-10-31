@@ -12,10 +12,13 @@ export default class extends Flatpickr {
     	const start_calendar = document.querySelector("#appointment_start_time")._flatpickr;
 		const end_calendar = document.querySelector("#appointment_end_time")._flatpickr;  // flatpickr
     	var duration = document.getElementById("appointment_duration").value;
-    	var d = start_calendar.selectedDates[0].setHours(start_calendar.selectedDates[0].getHours() + parseInt(duration));
+    	end_calendar.setDate(start_calendar.selectedDates[0]);
+    	var d = end_calendar.selectedDates[0].setHours(end_calendar.selectedDates[0].getHours() + parseFloat(duration));
     	d = new Date(d);
     	console.log('the callback returns ', d );
     	end_calendar.setDate(d);
 
   	}
+
+  	
 }

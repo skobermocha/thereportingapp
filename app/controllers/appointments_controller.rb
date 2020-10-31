@@ -33,6 +33,12 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments/1/edit
   def edit
+    if @alteration.systems.any?
+      @duration = 0
+      @appointment = Appointment.new
+    else
+      redirect_to @alteration, notice: "The alteration needs a system defined before you can schedule an appointment."
+    end
   end
 
   # POST /appointments
@@ -65,7 +71,9 @@ class AppointmentsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_appointment
+
     @appointment = Appointment.find(params[:id])
+    @alteration = Alteration.find (@appointment.alteration_id)
   end
 
   # Only allow a trusted parameter "white list" through.

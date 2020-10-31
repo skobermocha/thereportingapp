@@ -5,15 +5,14 @@
   <div class="form-group flatpickr">
     <%= form.label :start_time %>
     <%= form.text_field :start_time, class: "form-control", placeholder: "Select Date & Time...",data: { 
-        controller: "appointment", 
-        appointment_enable_time: true,
-        appointment_dateFormat: "Y-m-d H:i k",
-        appointment_default_date: appointment.start_time,
-        appointment_alt_input: true,
-        appointment_alt_format: "D M d, Y at h:i K",
-        appointment_default_hour: 7,
-        appointment_inline: false,
-        appointment_close_on_select: true,
+        controller: "appointment flatpickr", 
+        flatpickr_enable_time: true,
+        flatpickr_date_format: t("time.formats.long"),
+        flatpickr_alt_input: true,
+        flatpickr_alt_format: "D M d, Y at h:i K",
+        flatpickr_default_hour: 7,
+        flatpickr_inline: false,
+        flatpickr_close_on_select: true,
         action: "appointment#update_end_time"
       } %>
   </div>
@@ -52,7 +51,7 @@
               <th class="p-3 uppercase text-left text-xs"></th>
               <th class="p-3 uppercase text-left text-xs">Req. Verifications</th>
               <th class="p-3 uppercase text-left text-xs">Status</th>
-              <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+              <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Est Hrs</th>
             </tr>
           </thead>
 
@@ -66,20 +65,19 @@
   </div>
   <div class="form-group">
     <%= form.label :duration %>
-    <%= form.text_field :duration, class: "form-control", value: @duration %>
+    <%= form.text_field :duration, class: "form-control", value: params[:duration].presence || @duration %>
   </div>
   <div class="form-group">
     <%= form.label :end_time %>
-    <%= form.text_field :end_time, class: "form-control", :readonly => true, placeholder: "Select Date & Time...",data: { 
-        controller: "appointment", 
-        appointment_enable_time: true,
-        appointment_dateFormat: "Y-m-d H:i k",
-        appointment_default_date: appointment.start_time,
-        appointment_alt_input: true,
-        appointment_alt_format: "D M d, Y at h:i K",
-        appointment_default_hour: 7,
-        appointment_inline: false,
-        appointment_close_on_select: true
+    <%= form.text_field :end_time, class: "form-control", placeholder: "Select Date & Time...",data: { 
+        controller: "flatpickr", 
+        flatpickr_enable_time: true,
+        flatpickr_date_format: t("time.formats.long"),
+        flatpickr_alt_input: true,
+        flatpickr_alt_format: "D M d, Y at h:i K",
+        flatpickr_default_hour: 7,
+        flatpickr_inline: false,
+        flatpickr_close_on_select: true
       }%>
   </div>
 
