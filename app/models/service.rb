@@ -12,4 +12,5 @@
 #
 class Service < ApplicationRecord
 	has_many :services_needed
+	has_many :services_booked
 end

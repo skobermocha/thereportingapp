@@ -22,12 +22,9 @@ class AppointmentsController < ApplicationController
   # GET /appointments/new
   def new
     @alteration = Alteration.find (params[:alteration_id])
-    if @alteration.systems.any?
-      @duration = 0
-      @appointment = Appointment.new
-    else
-      redirect_to @alteration, notice: "The alteration needs a system defined before you can schedule an appointment."
-    end
+    @duration = 0
+    @appointment = Appointment.new
+    @appointment.services_booked.build
 
   end
 
@@ -78,6 +75,6 @@ class AppointmentsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def appointment_params
-    params.require(:appointment).permit(:alteration_id, :user_id, :user_created_id, :contact_name, :contact_phone, :start_time, :end_time)
+    params.require(:appointment).permit(:alteration_id, :user_id, :user_created_id, :contact_name, :contact_phone, :start_time, :end_time, :services_booked_attributes => [:status, :appointment_id, :system_id, :service_id])
   end
 end

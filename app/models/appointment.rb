@@ -26,5 +26,5 @@ class Appointment < ApplicationRecord
 	belongs_to :alteration
 	has_many :services_booked
 	has_many :systems, through: :alteration
-	accepts_nested_attributes_for :services_booked
+	accepts_nested_attributes_for :services_booked, :allow_destroy => true, :reject_if => :all_blank
 end

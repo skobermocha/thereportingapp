@@ -23,7 +23,6 @@ export default class extends Controller {
       
       var appt_duration = 0
     for (var i = 0; i < checkboxes.length; i++) {
-      console.log(checkboxes[i].checked, service_durations[i].innerHTML );
       if (checkboxes[i].checked == 1){
         appt_duration = appt_duration + parseFloat(service_durations[i].innerHTML);
       }

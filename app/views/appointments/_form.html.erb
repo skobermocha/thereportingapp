@@ -41,28 +41,41 @@
     <%= form.text_field :contact_phone, class: "form-control" %>
   </div>
   <div class="mb-4">
-    <% if @alteration.systems.any? %>
+    <%= form.fields_for :services_booked do |s| %>
       <% @alteration.systems.each do |system| %>
       <h5>System: <%= system.name %></h5>
       <div class="bg-white rounded shadow table-responsive">
         <table class="table">
           <thead>
             <tr>
-              <th class="p-3 uppercase text-left text-xs"></th>
-              <th class="p-3 uppercase text-left text-xs">Req. Verifications</th>
+              <th class="p-3 uppercase text-left text-xs">Booked</th>
+              <th class="p-3 uppercase text-left text-xs">System ID</th>
               <th class="p-3 uppercase text-left text-xs">Status</th>
-              <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Est Hrs</th>
+              <th class="p-3 uppercase text-left text-xs">Est Hrs</th>
             </tr>
           </thead>
 
           <tbody>
-            <%= render system.services_needed %>
+            <% system.services_needed.each do |service_needed| %>
+            <tr class="group border-t border-gray-400 hover:bg-gray-100" data-controller="toggle">
+              <td class="p-3">
+                <%= s.check_box(:service_id, { :multiple => true, data: { action: "toggle#calculate_duration" }, class: "form-checkbox service-checkbox" }, service_needed.service_id, nil) %>
+              </td>
+              <td class="p-3"><%= s.text_field :system_id, value: system.id, name: "appointment[services_booked_attributes][0][system_id][]", id: "appointment_services_booked_attributes_0_system_id_"+service_needed.service_id.to_s %></td>
+              <td class="p-3"><%= s.text_field :status, value: "Scheduled", name: "appointment[services_booked_attributes][0][status][]", id: "appointment_services_booked_attributes_0_status_"+service_needed.service_id.to_s %></td>
+              <td class="p-3 service-duration"><%= service_needed.service.duration %></td>
+            </tr>
+            <% if service_needed.status != 'Completed' %>
+             <% @duration += service_needed.service.duration.to_i %>
+            <% end %>
+            <% end %>
           </tbody>
         </table>
       </div>
       <% end %>
     <% end %>
   </div>
+
   <div class="form-group">
     <%= form.label :duration %>
     <%= form.text_field :duration, class: "form-control", value: params[:duration].presence || @duration %>

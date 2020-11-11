@@ -22,7 +22,7 @@
 #  fk_rails_...  (service_id => services.id)
 #
 class ServiceBooked < ApplicationRecord
-	has_many :services
+	belongs_to :service
 	belongs_to :appointment
 
 end
