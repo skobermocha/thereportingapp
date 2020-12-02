@@ -23,5 +23,6 @@
 class ServiceNeeded < ApplicationRecord
 	belongs_to :service
 	belongs_to :system
-
+	has_one :alteration, through: :system
+	has_many :services_booked, through: :service
 end

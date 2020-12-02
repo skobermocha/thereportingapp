@@ -24,18 +24,30 @@ class AppointmentsController < ApplicationController
     @alteration = Alteration.find (params[:alteration_id])
     @duration = 0
     @appointment = Appointment.new
-    @appointment.services_booked.build
-
+    @alteration.services_needed.count.times {@appointment.services_booked.build}
+    #@booked = @appointment.services_needed.joins(:services_booked).where(system_id:@appointment.services_booked.pluck(:system_id))
+    @need_to_book = @alteration.services_needed
   end
 
   # GET /appointments/1/edit
   def edit
-    if @alteration.systems.any?
-      @duration = 0
-      @appointment = Appointment.new
-    else
-      redirect_to @alteration, notice: "The alteration needs a system defined before you can schedule an appointment."
+    @needed = @alteration.services_needed
+    puts "needed:"
+    @needed.each { |link| p link }
+    @booked = @appointment.services_booked.pluck(:system_id, :service_id)
+    puts "booked:"
+    @booked.each { |link| p link }
+    @need_to_book = @needed.to_a
+    @booked.each_with_index do |b, index|
+      puts "index:" + @booked[index][0].to_s
+        @need_to_book.delete_if {|need| need.system_id == @booked[index][0] && need.service_id == @booked[index][1]}
     end
+    puts "Need-to-book:"
+    @need_to_book.each { |link| p link }
+    @need_to_book.each do |service|
+      @appointment.services_booked.build(service_id: service.service_id, system_id: service.system_id, status: service.status)
+    end
+    #@appointment.services_booked.sort_by { |x| [x.system_id, x.service_id] }
   end
 
   # POST /appointments
@@ -75,6 +87,6 @@ class AppointmentsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def appointment_params
-    params.require(:appointment).permit(:alteration_id, :user_id, :user_created_id, :contact_name, :contact_phone, :start_time, :end_time, :services_booked_attributes => [:status, :appointment_id, :system_id, :service_id])
+    params.require(:appointment).permit(:alteration_id, :user_id, :user_created_id, :contact_name, :contact_phone, :start_time, :end_time, services_booked_attributes: [:id, :status, :appointment_id, :system_id, :service_id, :_destroy])
   end
 end

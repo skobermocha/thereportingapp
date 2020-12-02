@@ -30,5 +30,12 @@ module TheReportingApp
 
     # Use default language as fallback if translation is missing
     config.i18n.fallbacks = true
+  
+    console do # IRB=true rails c
+      if ENV['IRB']
+        require 'irb'
+        config.console = IRB
+      end
+    end
   end
 end

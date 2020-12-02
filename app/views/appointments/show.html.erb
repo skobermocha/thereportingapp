@@ -56,9 +56,9 @@
               <tbody>
               <% @appointment.services_booked.each do |service_booked| %>
                 <tr class="group border-t border-gray-400 hover:bg-gray-100" data-action="click->table#click" data-controller="table">
-                            <td class="p-3"><%= service_booked.system_id %></td>
-                            <td class="p-3"><%= service_booked.service_id %></td>
-                            <td class="p-3">duration</td>
+                            <td class="p-3"><%= System.find(service_booked.system_id).name %></td>
+                            <td class="p-3"><%= service_booked.service.name %></td>
+                            <td class="p-3"><%= service_booked.service.duration %></td>
                             <td class="p-3"><%= service_booked.status %></td>                
                   <td>
                     <%= link_to "View", appointment_service_booked_path(@appointment, service_booked), class: "btn btn-link no-underline", :'data-target' => "table.url" %>

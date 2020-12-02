@@ -24,5 +24,6 @@
 class ServiceBooked < ApplicationRecord
 	belongs_to :service
 	belongs_to :appointment
-
+	has_one :alteration, through: :appointment
+	has_many :services_needed, through: :service
 end

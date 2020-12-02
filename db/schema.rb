@@ -328,6 +328,7 @@ ActiveRecord::Schema.define(version: 2020_10_21_231416) do
     t.bigint "system_id"
     t.index ["appointment_id"], name: "index_services_booked_on_appointment_id"
     t.index ["service_id"], name: "index_services_booked_on_service_id"
+    t.index ["system_id"], name: "index_services_needed_on_system_id"
   end
 
   create_table "services_needed", force: :cascade do |t|
@@ -492,6 +493,7 @@ ActiveRecord::Schema.define(version: 2020_10_21_231416) do
   add_foreign_key "project_users", "projects"
   add_foreign_key "services_booked", "appointments"
   add_foreign_key "services_booked", "services"
+  add_foreign_key "services_booked", "systems", column: "system_id"
   add_foreign_key "services_needed", "services"
   add_foreign_key "services_needed", "systems"
   add_foreign_key "systems", "alterations"

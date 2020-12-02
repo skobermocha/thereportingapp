@@ -63,7 +63,7 @@ class System < ApplicationRecord
 	has_many :services_needed, dependent: :destroy
 	has_one :heating_type
 	has_one :cooling_type
-	has_many :apointments, through: :alterations
+	has_many :appointments, through: :alterations
 	acts_as_taggable_on :altered_heating_components, :altered_cooling_components
 	accepts_nested_attributes_for :services_needed
 end
