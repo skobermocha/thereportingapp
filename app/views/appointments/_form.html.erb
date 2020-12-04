@@ -7,9 +7,10 @@
     <%= form.text_field :start_time, class: "form-control", placeholder: "Select Date & Time...",data: { 
         controller: "appointment flatpickr", 
         flatpickr_enable_time: true,
-        flatpickr_date_format: t("time.formats.long"),
+        #flatpickr_date_format: t("time.formats.long"),
         flatpickr_alt_input: true,
         flatpickr_alt_format: "D M d, Y at h:i K",
+        flatpickr_default_date: @appointment.start_time,
         flatpickr_default_hour: 7,
         flatpickr_inline: false,
         flatpickr_close_on_select: true,
@@ -91,9 +92,10 @@
     <%= form.text_field :end_time, class: "form-control", placeholder: "Select Date & Time...",data: { 
         controller: "flatpickr", 
         flatpickr_enable_time: true,
-        flatpickr_date_format: t("time.formats.long"),
+        #flatpickr_date_format: t("time.formats.long"),
         flatpickr_alt_input: true,
         flatpickr_alt_format: "D M d, Y at h:i K",
+        flatpickr_default_date: @appointment.end_time,
         flatpickr_default_hour: 7,
         flatpickr_inline: false,
         flatpickr_close_on_select: true

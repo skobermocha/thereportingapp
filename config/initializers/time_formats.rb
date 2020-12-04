@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:pretty_date] = '%a %b %e, %Y at %I:%M %p' # Mon Dec 07, 2020 at 7:00 AM

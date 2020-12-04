@@ -32,11 +32,11 @@
       </div>
       <div class="mb-4">
         <h5>Start time</h5>
-        <%= @appointment.start_time %>
+        <%= @appointment.start_time.to_formatted_s(:pretty_date) %>
       </div>
       <div class="mb-4">
         <h5>End time</h5>
-        <%= @appointment.end_time %>
+        <%= @appointment.end_time.to_formatted_s(:pretty_date) %>
       </div>
       <div class="mb-4">
         <h5>Services Booked</h5>
