@@ -18,7 +18,13 @@
 
   <div class="form-group">
     <%= form.label :climate_zone %>
-    <%= form.select :climate_zone, [['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['10'],['11'],['12'],['13'],['14'],['15'],['16']], class: "form-control" %>
+    <div class="relative">
+      <%= form.select :climate_zone, [['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['10'],['11'],['12'],['13'],['14'],['15'],['16']],{}, {class: "select"} %>
+      <div class="caret">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" role="img" aria-labelledby="a63wx0fobneuwa5m7xv65kheccad7woo" class="fill-current h-4 w-4"><title id="a63wx0fobneuwa5m7xv65kheccad7woo">Icons/caret</title><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+
+      </div>
+    </div>
   </div>
 
   <div class="form-group">
@@ -61,12 +67,86 @@
 
   <div class="form-group">
     <%= form.label :utility_electricity %>
-    <%= form.select :utility_electricity, [['PG&E'],['SCE'],['SDG&E'],['SMUD'],['TID'],['MID']], class: "form-control" %>
+    <div class="relative">
+      <%= form.select :utility_electricity, ["Alameda [Alameda Municipal Utility]",
+        "Anaheim [Anaheim Public Utilites Department]",
+        "Anza [Anza Electric Cooperative]",
+        "Azusa  [Azusa Light and Water]",
+        "Banning [Banning Electric Utility]",
+        "Bear [Bear Valley Electric]",
+        "BIGGS [Biggs Municipal Utilities]",
+        "Burbank [Burbank Water and Power]",
+        "Corona [City of Corona]",
+        "Colton [Colton Electric Utility]",
+        "Glendale [Glendale Water and Power]",
+        "Gridley [Gridley Electric Utility]",
+        "HLDBGMU [Healdsburg Municipal Utility]",
+        "Imperial [Imperial Irrigation District]",
+        "Island [Island Energy]",
+        "Kirkwood [Kirkwood Meadows Public Utility District]",
+        "LMUD [Lassen Municipal Utility District]",
+        "LMUD-SIR [Lassen Municipal Utility District - S.I.R.]",
+        "Lathrop [Lathrop Irrigation District]",
+        "Liberty [Liberty Energy]",
+        "Lodi [Lodi Electric Utility]",
+        "Lompoc [Lompoc Electric Utility]",
+        "LADWP [Los Angeles Department of Water and Power]",
+        "Merced [Merced Irrigation District]",
+        "MID [Modesto Irrigation District]",
+        "MID-MH [Modesto Irrigation District - Mountain House]",
+        "Moreno [Moreno Valley Utility]",
+        "Needles [Needles Public Utility Authority]",
+        "NVE [NV Energy (aka Sierra Pacific Power)]",
+        "PG&E [Pacific Gas and Electric Company]",
+        "PP&L-DN [Pacific Power and Light Company (Del Norte County)]",
+        "PP&L-Othr [Pacific Power and Light Company (except Del Norte)]",
+        "Palo Alto [Palo Alto Utilities Department]",
+        "Pasadena [Pasadena Water and Power]",
+        "P-SREC [Plumas Sierra Rural Electric Cooperative]",
+        "Rancho [Rancho Cucamonga Municipal Utility]",
+        "Redding [Redding Electric Utility]",
+        "Riverside [Riverside Public Utilities]",
+        "Roseville [Roseville Electric]",
+        "SMUD [Sacramento Municipal Utility District]",
+        "SDG&E [San Diego Gas and Electric Company]",
+        "SFPUC [SF Public Utilities Commission]",
+        "SLMU [Shasta Lake Municipal Utility]",
+        "Shelter [Shelter Cove Resort Improvement District]",
+        "Silicon [Silicon Valley Power]",
+        "SCE [Southern California Edison]",
+        "SVEC [Surprise Valley Electrification Corporation]",
+        "Trinity-A [Trinity Public Utilities District Zone A]",
+        "Trinity-B [Trinity Public Utilities District Zone B]",
+        "TDPUD [Truckee Donner Public Utility District]",
+        "TID [Turlock Irrigation District]",
+        "TID-West [Turlock Irrigation District Westside Zone]",
+        "Ukiah [Ukiah Municipal Utility District]"], {include_blank: true},{ class: "select"} 
+      %>
+      <div class="caret">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" role="img" aria-labelledby="a63wx0fobneuwa5m7xv65kheccad7woo" class="fill-current h-4 w-4"><title id="a63wx0fobneuwa5m7xv65kheccad7woo">Icons/caret</title><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+
+      </div>
+    </div>
   </div>
 
   <div class="form-group">
     <%= form.label :utility_gas %>
-    <%= form.select :utility_gas, [['PG&E'],['SoCal Gas'],['SDG&E']], class: "form-control" %>
+    <div class="relative">
+      <%= form.select :utility_gas, ["No Gas [Electric Only]",
+        "Island [Island Energy]",
+        "LBGO [Long Beach Gas & Oil Department]",
+        "PG&E [Pacific Gas and Electric Company]",
+        "Palo Alto [Palo Alto Utilities Department]",
+        "SDG&E [San Diego Gas and Electric Company]",
+        "SoCalGas [Southern California Gas Company]",
+        "SWG-NorCal [Southwest Gas Corporation - Northern California]",
+        "SWG-SLT [Southwest Gas Corporation - South Lake Tahoe]",
+        "SWG-SoCal [Southwest Gas Corporation - Southern California]"], {include_blank: true}, {class: "select"} 
+      %>
+      <div class="caret">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" role="img" aria-labelledby="a63wx0fobneuwa5m7xv65kheccad7woo" class="fill-current h-4 w-4"><title id="a63wx0fobneuwa5m7xv65kheccad7woo">Icons/caret</title><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+      </div>
+    </div>
   </div>
 
   <% if form.object.persisted? %>

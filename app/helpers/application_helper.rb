@@ -1,6 +1,6 @@
 module ApplicationHelper
   include Pagy::Frontend
-
+  
   def avatar_url_for(user, opts = {})
     size = opts[:size] || 48
 

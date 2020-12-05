@@ -52,7 +52,12 @@
 
   <div class="form-group">
     <%= form.label :building_type %>
-    <%= form.select :building_type, [['Single family'],['Multifamily'], ['Multifamily with central water heating']] , class: "form-control" %>
+    <div class="relative">
+      <%= form.select :building_type, [['Single family'],['Multifamily'], ['Multifamily with central water heating']] , {},{class: "select"} %>
+      <div class="caret">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" role="img" aria-labelledby="a63wx0fobneuwa5m7xv65kheccad7woo" class="fill-current h-4 w-4"><title id="a63wx0fobneuwa5m7xv65kheccad7woo">Icons/caret</title><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+      </div>
+    </div>
   </div>
 
   <div class="form-group">
@@ -67,7 +72,12 @@
 
   <div class="form-group">
     <%= form.label :climate_zone %>
-    <%= form.select :climate_zone, [['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['10'],['11'],['12'],['13'],['14'],['15'],['16']], class: "form-control" %>
+    <div class="relative">
+      <%= form.select :climate_zone, [['1'],['2'],['3'],['4'],['5'],['6'],['7'],['8'],['9'],['10'],['11'],['12'],['13'],['14'],['15'],['16']], {},{class: "select"} %>
+      <div class="caret">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" role="img" aria-labelledby="a63wx0fobneuwa5m7xv65kheccad7woo" class="fill-current h-4 w-4"><title id="a63wx0fobneuwa5m7xv65kheccad7woo">Icons/caret</title><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+      </div>
+    </div>
   </div>
 
   <div class="form-group">
