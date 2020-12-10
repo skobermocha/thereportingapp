@@ -5,10 +5,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   def index
-    @shared_projects = ProjectUser.where(account_id: current_account.id)
-    @account_projects = Project.where(owner_id: current_account.id)
-    @account_projects = @account_projects.active_status(params[:active_status]) if params[:active_status]   
-    @projects = @account_projects.joins(:project_users).merge(@shared_projects)
+    @projects = current_account.projects
     @pagy, @projects = pagy(@projects)
 
     # We explicitly load the records to avoid triggering multiple DB calls in the views when checking if records exist and iterating over them.
