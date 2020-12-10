@@ -9,6 +9,6 @@
 #
 class SampleGroup < ApplicationRecord
   has_many :lots
-  has_many :projects, through: :lots
+  has_one :project, through: :lots
 
 end
