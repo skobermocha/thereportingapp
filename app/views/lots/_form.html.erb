@@ -27,15 +27,21 @@
   </div>
 
   <div class="form-group">
+    
     <%= form.label :plan_type_id %>
-    <%= form.text_field :plan_type_id, class: "form-control" %>
+    <div class="relative">
+      <%= form.collection_select :plan_type_id, @project.plan_types, :id, :name,{},class: "select" %>
+      <div class="caret">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" role="img" aria-labelledby="a63wx0fobneuwa5m7xv65kheccad7woo" class="fill-current h-4 w-4"><title id="a63wx0fobneuwa5m7xv65kheccad7woo">Icons/caret</title><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+      </div>
+    </div>
   </div>
 
   <div class="form-group flex justify-between">
     <%= form.button class: "btn btn-primary" %>
 
     <% if form.object.persisted? %>
-      <%= link_to 'Delete', form.object, class: "btn btn-danger outline", method: :delete, data: { remote: true, confirm: "Are you sure?" } %>
+      <%= link_to 'Delete', project_lot_path(@project,@lot), class: "btn btn-danger outline", method: :delete, data: { remote: true, confirm: "Are you sure?" } %>
     <% end %>
   </div>
 <% end %>
