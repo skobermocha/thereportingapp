@@ -18,7 +18,7 @@ class AlterationUsersController < ApplicationController
 
   # GET /alteration_users/new
   def new
-    @alteration_user = @alteraion.alteration_user.build
+    @alteration_user = @alteration.alteration_users.build
   end
 
   # GET /alteration_users/1/edit
