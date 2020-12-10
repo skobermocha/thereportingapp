@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   def index
     @projects = current_account.projects
+    @projects = @projects.active_status(params[:active_status]) if params[:active_status]
     @pagy, @projects = pagy(@projects)
 
     # We explicitly load the records to avoid triggering multiple DB calls in the views when checking if records exist and iterating over them.
