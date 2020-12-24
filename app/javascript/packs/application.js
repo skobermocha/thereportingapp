@@ -34,6 +34,7 @@ LocalTime.start()
 
 // ADD YOUR JAVACSRIPT HERE
 import "src/system_service_logic"
+import "src/google_maps"
 
 // Start Rails UJS
 Rails.start()

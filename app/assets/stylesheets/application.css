@@ -12,3 +12,7 @@
  *
  *= require_self
  */
+#map {
+  min-height: 400px;
+  width: 100%;
+}

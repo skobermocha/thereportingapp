@@ -23,6 +23,12 @@
           <h5>Zipcode</h5>
           <%= @alteration.zipcode %>
         </div>
+        <p>
+<%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=17&size=400x300&markers=size:small%7Ccolor:red%7C#{@alteration.latitude},#{@alteration.longitude}&key=#{Rails.application.credentials.google_maps_api}", alt: "Map" %>
+</p>
+
+
+
         <div class="mb-4">
           <h5>Jurisdiction</h5>
           <%= @alteration.jurisdiction %>

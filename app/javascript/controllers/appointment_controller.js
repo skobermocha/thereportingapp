@@ -19,6 +19,4 @@ export default class extends Flatpickr {
     	end_calendar.setDate(d);
 
   	}
-
-  	
 }

@@ -64,6 +64,6 @@ class AlterationsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def alteration_params
-    params.require(:alteration).permit(:owner_id, :name, :address, :city, :zipcode, :jurisdiction, :permit_number, :ho_name, :ho_phone, :ho_email, :building_type, :dwelling_unit_name, :dwelling_unit_cfa, :climate_zone, :bedroom_count)
+    params.require(:alteration).permit(:owner_id, :name, :address, :city, :latitude, :longitude, :zipcode, :jurisdiction, :permit_number, :ho_name, :ho_phone, :ho_email, :building_type, :dwelling_unit_name, :dwelling_unit_cfa, :climate_zone, :bedroom_count)
   end
 end

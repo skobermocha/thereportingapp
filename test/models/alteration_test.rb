@@ -14,6 +14,8 @@
 #  ho_name            :string
 #  ho_phone           :string
 #  jurisdiction       :string
+#  latitude           :decimal(, )
+#  longitude          :decimal(, )
 #  name               :string
 #  permit_number      :string
 #  zipcode            :string
