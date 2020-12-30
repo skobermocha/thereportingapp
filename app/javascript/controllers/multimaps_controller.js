@@ -1,8 +1,10 @@
 import { Controller} from "stimulus"
+import MarkerClusterer from '@googlemaps/markerclustererplus';
+
+let markers = [];
 
 export default class extends Controller {
   static targets = ["map", "appointment", "container"]
-  //static values = { appointment: Number, address: String, rater: Number, start: String}
 
   connect() {
     if (typeof (google) != "undefined"){
@@ -12,16 +14,22 @@ export default class extends Controller {
   }
 
   initializeMultiMap() {
-    this.map()
-    this.multiMarker()
+  this.map()
+  this.multiMarker()
+  new MarkerClusterer(this.map(), markers, {
+    imagePath:
+      "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+    gridSize: 30
+  });
     console.log('init MultiMap')
   }
 
   map() {
     if(this._map == undefined) {
       this._map = new google.maps.Map(this.mapTarget, {
-        center: new google.maps.LatLng(36.7783,119.4179),
-        zoom: (4)
+        center: {lat: 36.7783, lng: 119.4179},
+        zoom: 4,
+        mapId: '7ba78fce9a2bd4e9'
       })
     }
     return this._map
@@ -40,28 +48,29 @@ export default class extends Controller {
   multiMarker(){
   // Display multiple markers on a map
   var bounds = new google.maps.LatLngBounds();
-  var markers = this.getLocations();
+  var places = this.getLocations();
   var infoWindow = new google.maps.InfoWindow(), marker, i;
     
-    // Loop through our array of markers & place each one on the map  
-    for( i = 0; i < markers.length; i++ ) {
-        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+    // Loop through our array of places & place each one on the map  
+    for( i = 0; i < places.length; i++ ) {
+        var position = new google.maps.LatLng(places[i][1], places[i][2]);
         bounds.extend(position);
         marker = new google.maps.Marker({
             position: position,
             map: this.map(),
-            title: markers[i][0]
+            title: places[i][0]
         });
-        
+        markers.push(marker);
+
         // Allow each marker to have an info window    
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
-                infoWindow.setContent(markers[i][0]);
+                infoWindow.setContent(places[i][0]);
                 infoWindow.open(map, marker);
             }
         })(marker, i));
 
-        // Automatically center the map fitting all markers on the screen
+        // Automatically center the map fitting all places on the screen
         this.map().fitBounds(bounds);
     }
 
@@ -76,7 +85,7 @@ export default class extends Controller {
     var i = 0
     var locations = []
     for ( i = 0; i < this.appointmentTargets.length; i++ ) {
-      console.log ([this.appointmentTargets[i].dataset.id,this.appointmentTargets[i].dataset.latitude, this.appointmentTargets[i].dataset.longitude])
+      //console.log ([this.appointmentTargets[i].dataset.id,this.appointmentTargets[i].dataset.latitude, this.appointmentTargets[i].dataset.longitude])
       locations.push([this.appointmentTargets[i].dataset.id,this.appointmentTargets[i].dataset.latitude, this.appointmentTargets[i].dataset.longitude])
     }
     return locations

@@ -24,7 +24,8 @@ export default class extends Controller {
           this.latitudeTarget.value || 39.5,
           this.longitudeTarget.value || -98.35
         ),
-        zoom: (this.latitudeTarget.value == null ? 4 : 17)
+        zoom: (this.latitudeTarget.value == null ? 4 : 17),
+        mapId: '7ba78fce9a2bd4e9'
       })
     }
     return this._map

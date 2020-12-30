@@ -16,7 +16,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google_maps_api}&libraries=places&callback=dispatchMapsEvent",
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google_maps_api}&map_ids=7ba78fce9a2bd4e9&libraries=places&callback=dispatchMapsEvent",
                             async: true,
                             defer: true,
                             "data-turbolinks-eval": false %>
