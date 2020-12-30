@@ -1,29 +1,30 @@
 import { Controller} from "stimulus"
 
 export default class extends Controller {
-  static targets = ["field", "map", "latitude", "longitude", "postal_code", "city", "climate_zone"]
+  static targets = ["field", "map", "latitude", "longitude", "postal_code", "city", "climate_zone", "appointment"]
 
   connect() {
     if (typeof (google) != "undefined"){
       this.initializeMap()
     }
+    console.log("Hello, Stimulus!", this.element)
   }
 
   initializeMap() {
     this.map()
     this.marker()
     this.autocomplete()
-    console.log('init')
+    console.log('init Map')
   }
 
   map() {
     if(this._map == undefined) {
       this._map = new google.maps.Map(this.mapTarget, {
         center: new google.maps.LatLng(
-          this.latitudeTarget.value,
-          this.longitudeTarget.value
+          this.latitudeTarget.value || 39.5,
+          this.longitudeTarget.value || -98.35
         ),
-        zoom: 17
+        zoom: (this.latitudeTarget.value == null ? 4 : 17)
       })
     }
     return this._map
@@ -39,6 +40,7 @@ export default class extends Controller {
       })
       this._marker.addListener('drag', this.markerDrag.bind(this))
       this._marker.addListener('dragend', this.markerDragEnd.bind(this))
+      this._marker.addListener('click', this.markerClick.bind(this))
       let mapLocation = {
         lat: parseFloat(this.latitudeTarget.value),
         lng: parseFloat(this.longitudeTarget.value)
@@ -50,7 +52,11 @@ export default class extends Controller {
     return this._marker
   }
 
-
+  markerClick(){
+    var infowindow = new google.maps.InfoWindow();
+    infowindow.setContent("Marker Test");
+    infowindow.open(this.map(), this.marker());
+  }
   markerDrag(){
     // when marker is dragged update input values
     var latlng = this.marker().getPosition();
@@ -85,8 +91,12 @@ export default class extends Controller {
       return;
     }
 
-    this.map().fitBounds(place.geometry.viewport)
-    this.map().setCenter(place.geometry.location)
+    if (place.geometry.viewport) {
+      this.map().fitBounds(place.geometry.viewport)
+    } else {
+      this.map().setCenter(place.geometry.location)
+      this.map.setZoom(6)
+    }
     this.marker().setPosition(place.geometry.location)
     this.marker().setVisible(true)
 
@@ -112,4 +122,6 @@ export default class extends Controller {
   preventSubmit(e) {
     if (e.key == "Enter") { e.preventDefault() }
   }
+
+  
 }

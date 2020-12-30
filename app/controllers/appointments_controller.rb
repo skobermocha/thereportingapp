@@ -4,9 +4,9 @@ class AppointmentsController < ApplicationController
 
   # GET /appointments
   def index
-    @shared_alterations = AlterationUser.where(account_id: current_account.id)
-    @account_alterations = Alteration.where(owner_id: current_account.id)
-    @alterations = @account_alterations.joins(:alteration_users).merge(@shared_alterations)
+    #@shared_alterations = AlterationUser.where(account_id: current_account.id)
+    #@account_alterations = Alteration.where(owner_id: current_account.id)
+    @alterations = current_account.alterations
     @appointments = Appointment.where(alteration_id: @alterations)
     @pagy, @appointments = pagy(@appointments.sort_by_params(params[:sort], sort_direction))
 

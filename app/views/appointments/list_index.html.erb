@@ -1,0 +1,47 @@
+<div class="container mx-auto my-8 px-4">
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="h3">Appointments</h1>
+
+    <% if @appointments.any? %>
+      <%= link_to 'New Appointment', new_appointment_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+  <% if @appointments.any? %>
+    <div class="bg-white rounded shadow table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @appointments, :alteration_name, 'Alteration', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @appointments, :alteration_address, 'Address', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @appointments, :user_id, 'Scheduled for', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @appointments, :contact_name, 'Contact name', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @appointments, :contact_phone, 'Contact phone', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @appointments, :start_time, 'Start time', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs"><%= sortable @appointments, :end_time, 'End time', class: 'text-gray-700' %></th>
+            <th class="p-3 uppercase text-left text-xs text-gray-700 w-20">Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <%= render @appointments  %>
+        </tbody>
+      </table>
+    </div>
+
+    <% if @pagy.pages > 1 %>
+      <div class="text-center my-6">
+        <%== pagy_nav(@pagy) %>
+      </div>
+    <% end %>
+
+  <% else %>
+    <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+      <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+      <div class="flex-1 text-center">
+        <p class="h3 mb-4">Create your first Appointment</p>
+        <%= link_to 'New Appointment', new_appointment_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>
