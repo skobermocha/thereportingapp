@@ -7,8 +7,17 @@ class AppointmentsController < ApplicationController
     #@shared_alterations = AlterationUser.where(account_id: current_account.id)
     #@account_alterations = Alteration.where(owner_id: current_account.id)
     @alterations = current_account.alterations
-    @appointments = Appointment.where(alteration_id: @alterations)
-    @pagy, @appointments = pagy(@appointments.sort_by_params(params[:sort], sort_direction))
+    if params[:query]
+      @appointments = Appointment.where(alteration_id: @alterations).global_search(params[:query])
+    else
+      @appointments = Appointment.where(alteration_id: @alterations)
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: @appointments.to_json(only: [:id, :contact_name, :contact_phone, :start_time, :end_time, :alteration_id, :user_id],
+                          include: [alteration: { only: [:id, :address, :city, :latitude, :longitude]}])  }
+    end
+    #@pagy, @appointments = pagy(@appointments.sort_by_params(params[:sort], sort_direction))
 
     # We explicitly load the records to avoid triggering multiple DB calls in the views when checking if records exist and iterating over them.
     # Calling @appointments.any? in the view will use the loaded records to check existence instead of making an extra DB call.

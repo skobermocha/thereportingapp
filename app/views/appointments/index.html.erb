@@ -1,13 +1,22 @@
 
-<div class="container mx-auto my-8 px-4">
-  <div class="flex justify-between items-center mb-4">
+<div class="container mx-auto my-8 px-4" data-controller="multimaps">
+  <div class="flex justify-between items-center mb-4" >
     <h1 class="h3">Appointments</h1>
+    <% if @appointments.any? %>
+      <%= form_with(url: "/appointments", method: :get, data: {action: "submit->multimaps#submit"}) do |f| %>
+        <%= search_field_tag :query, params[:query], data: {target: "multimaps.query"}, class: "form-control", placeholder: "Search..." %>
+        <%= submit_tag("Search", class: "btn btn-primary") %>
+      <% end %>
+    <% end %>
   </div>
   <% if @appointments.any? %>
-  <div data-controller="multimaps" class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row"> 
-    <% @appointments.each do |appointment| %>
-    <%= render 'appointment_card', appointment: appointment  %>
-    <% end %>
+  <div class="bg-white rounded shadow flex flex-col items-center justify-between p-8 lg:flex-row">
+     
+    <div data-target="multimaps.container" class="hidden">
+      <% @appointments.each do |appointment| %>
+        <%= render 'appointment_card', appointment: appointment  %>
+      <% end %>
+    </div>
     <%= content_tag :div, nil, data: { target: "multimaps.map", action: "google-maps-callback@window->multimaps#initializeMultiMap" }, id: 'map', class: 'map' %>
   </div>
   <% else %>

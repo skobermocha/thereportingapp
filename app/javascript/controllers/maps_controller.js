@@ -96,7 +96,7 @@ export default class extends Controller {
       this.map().fitBounds(place.geometry.viewport)
     } else {
       this.map().setCenter(place.geometry.location)
-      this.map.setZoom(6)
+      this.map().setZoom(6)
     }
     this.marker().setPosition(place.geometry.location)
     this.marker().setVisible(true)
@@ -104,8 +104,6 @@ export default class extends Controller {
     this.latitudeTarget.value = place.geometry.location.lat()
     this.longitudeTarget.value = place.geometry.location.lng()
     
-    //this.postal_codeTarget.value = "zipcode"
-    // place = autocomplete.getPlace();
     for (var i = 0; i < place.address_components.length; i++) {
       for (var j = 0; j < place.address_components[i].types.length; j++) {
         if (place.address_components[i].types[j] == "postal_code") {

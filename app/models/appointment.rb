@@ -29,4 +29,13 @@ class Appointment < ApplicationRecord
 	has_many :services_needed, through: :systems
 	has_many :services, through: :services_booked
 	accepts_nested_attributes_for :services_booked, allow_destroy: true, reject_if: :all_blank #lambda {|attributes| attributes['service_id'].blank?}
+
+	include PgSearch::Model
+
+	pg_search_scope :global_search,
+		against: [:id],
+		using: {
+			tsearch:{prefix: true}
+		}
+
 end
