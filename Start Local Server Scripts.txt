@@ -1,0 +1,16 @@
+Jumpstart Pro is bases of setup
+https://jumpstartrails.com/docs/installation
+
+
+Starts servers needed to run local
+C:\Windows\System32\bash.exe -c "sudo ~/.local/bin/start_postgresql.sh"
+C:\Windows\System32\bash.exe -c "sudo service redis-server start --daemonize yes"
+
+start bash command line
+C:\Windows\System32\bash.exe
+
+change directory to thereportingapp folder
+thereportingapp (shortcut code to do the change)
+
+bundle install
+rails s
