@@ -4,7 +4,7 @@
 # Examples:
 #
 # Uncomment the following to create an Admin user for Production in Jumpstart Pro
-# User.create name: "name", email: "email", password: "password", password_confirmation: "password", admin: true, terms_of_service: true
+User.create name: "Admin", email: "admin@thereportingapp.com", password: "admin", password_confirmation: "admin", admin: true, terms_of_service: true
 
 
 ### Zipcode for CZ lookup
