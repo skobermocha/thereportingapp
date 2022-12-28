@@ -1,4 +1,9 @@
 FROM ruby:2.7.2
+# Install Rails
+RUN gem install rails webdrivers
+# Default value to allow debug server to serve content over GitHub Codespace's port forwarding service
+# The value is a comma-separated list of allowed domains 
+ENV RAILS_DEVELOPMENT_HOSTS=".githubpreview.dev,.preview.app.github.dev,.app.github.dev"
 
 RUN gem install "bundler:~>2" --no-document && \
     gem update --system && \
@@ -79,8 +84,7 @@ COPY ./config/jumpstart/Gemfile /app/config/jumpstart/
 COPY ./lib/jumpstart/ /app/lib/jumpstart/
 RUN bundle config --local without "staging production omit" && bundle install --jobs $(nproc) --retry 5
 COPY package.json yarn.lock /app/
-RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g yarn" 2>&1
-#RUN yarn install
+RUN yarn install
 COPY . /app
 
 CMD ["bin/rails", "s", "-b", "0.0.0.0"]

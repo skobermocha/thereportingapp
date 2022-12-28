@@ -1,4 +1,6 @@
-FROM ruby:2.7.2
+FROM ruby:3.1
+
+ENV RAILS_ENV=production
 
 RUN gem install "bundler:~>2" --no-document && \
     gem update --system && \
@@ -77,11 +79,12 @@ WORKDIR /app
 COPY ./Gemfile* /app/
 COPY ./config/jumpstart/Gemfile /app/config/jumpstart/
 COPY ./lib/jumpstart/ /app/lib/jumpstart/
-RUN bundle config --local without "staging production omit" && bundle install --jobs $(nproc) --retry 5
+RUN bundle config --local without "development test omit" && bundle install --jobs $(nproc) --retry 5
 COPY package.json yarn.lock /app/
-RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g yarn" 2>&1
-#RUN yarn install
+RUN yarn install
 COPY . /app
+
+RUN bin/rails assets:precompile
 
 CMD ["bin/rails", "s", "-b", "0.0.0.0"]
 
